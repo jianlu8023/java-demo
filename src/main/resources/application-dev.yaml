@@ -1,2 +1,14 @@
 server:
   port: 8080
+
+spring:
+  datasource:
+    url: jdbc:dm://192.168.58.131:5236
+    username: SYSDBA
+    password: SYSDBA001
+    driver-class-name: dm.jdbc.driver.DmDriver
+    druid:
+      url: ${spring.datasource.url}
+      username: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+      driver-class-name: ${spring.datasource.driver-class-name}

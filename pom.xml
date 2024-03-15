@@ -13,7 +13,6 @@
 
     <description>java-study</description>
 
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -32,12 +31,25 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.7.16</spring-boot.version>
+
+        <datafaker.version>1.4.0</datafaker.version>
+        <fastjson.version>2.0.22</fastjson.version>
+        <DmJdbcDriver18.version>8.1.1.193</DmJdbcDriver18.version>
+        <mysql-connector-j.version>8.0.33</mysql-connector-j.version>
+        <druid-spring-boot-starter.version>1.1.10</druid-spring-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.5.3.2</mybatis-plus-boot-starter.version>
     </properties>
 
 
-
-
     <dependencies>
+
+        <!--引入 springboot start-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!--引入 thymeleaf-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -46,6 +58,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 引入jdbc支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <!-- 引入devtools支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -57,13 +83,45 @@
         <dependency>
             <groupId>net.datafaker</groupId>
             <artifactId>datafaker</artifactId>
-            <version>1.4.0</version>
+            <version>${datafaker.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>2.0.22</version>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--    <groupId>com.dameng</groupId>-->
+        <!--    <artifactId>Dm8JdbcDriver18</artifactId>-->
+        <!--    <version>8.1.1.193</version>-->
+        <!--<scope>system</scope>-->
+        <!--<systemPath>${project.basedir}/src/main/resources/libraries/DmJdbcDriver18-8.1.1.193.jar</systemPath>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>DmJdbcDriver18</artifactId>
+            <version>${DmJdbcDriver18.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>${mysql-connector-j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid-spring-boot-starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
 
     </dependencies>
@@ -86,9 +144,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>
-                        com.github.jianlu8023.javastudy.Application
-                    </mainClass>
+                    <mainClass>com.github.jianlu8023.javastudy.Application</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>
@@ -102,5 +158,40 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- 添加镜像仓库配置   -->
+    <repositories>
+        <!-- 使用阿里云镜像仓库用来提高下载速度-->
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun Repository</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jitpack</id>
+            <name>jitpack.io</name>
+            <url>https://jitpack.io</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun</id>
+            <name>aliyun Repository</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
