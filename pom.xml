@@ -64,6 +64,10 @@
         <!--<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>-->
         <!--latest-->
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+
+        <grpc.version>1.26.0</grpc.version>
+        <protobuf.plugin.version>0.6.1</protobuf.plugin.version>
+        <protoc.version>3.5.1</protoc.version>
     </properties>
 
 
@@ -145,6 +149,34 @@
         </dependency>
 
         <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot-starter.version}</version>
@@ -153,8 +185,42 @@
     </dependencies>
 
     <build>
+        <extensions>
+            <!-- os-maven-plugin 插件，从 OS 系统中获取参数 -->
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.5.0.Final</version>
+            </extension>
+        </extensions>
+
         <finalName>java-study_${project.version}</finalName>
         <plugins>
+            <!-- grpc代码生成插件 -->
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <configuration>
+                    <protoSourceRoot>src/main/resources/proto</protoSourceRoot>
+                    <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}
+                    </protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+                    </pluginArtifact>
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <clearOutputDirectory>false</clearOutputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!--执行main方法-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -162,7 +228,7 @@
                 <version>${exec-maven-plugin.version}</version>
                 <executions>
                     <execution>
-                    <phase>install</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
