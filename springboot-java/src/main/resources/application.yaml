@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+
+#https://www.cnblogs.com/qq931399960/p/11889349.html
+server:
+#  ssl:
+#    key-store: classpath:cert.pem
+#    key-store-password: jianlu8023
+#    key-store-type: PKCS12
+#    key-alias:
