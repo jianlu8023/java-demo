@@ -18,6 +18,7 @@
         <module>java-demo-docker-deployment</module>
         <module>java-demo-multi-datasource</module>
         <module>java-demo-utils</module>
+        <module>java-demo-mybatisplus-batchinsert</module>
     </modules>
 
     <properties>
@@ -45,7 +46,7 @@
         <!--latest-->
         <exec-maven-plugin.version>3.2.0</exec-maven-plugin.version>
 
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <!--<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>-->
         <!--latest-->
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
 
@@ -71,6 +72,8 @@
         <mysql-connector-j.version>8.0.33</mysql-connector-j.version>
         <dynamic-datasource-spring-boot-starter.version>4.3.0</dynamic-datasource-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>2.1.0</pagehelper-spring-boot-starter.version>
+        <random-beans.version>3.9.0</random-beans.version>
+
     </properties>
 
     <dependencyManagement>
@@ -90,6 +93,11 @@
                 <scope>test</scope>
             </dependency>
 
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
             <dependency>
                 <groupId>net.datafaker</groupId>
                 <artifactId>datafaker</artifactId>
@@ -179,6 +187,12 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.benas</groupId>
+                <artifactId>random-beans</artifactId>
+                <version>${random-beans.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -379,40 +393,5 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <!-- 添加镜像仓库配置   -->
-    <repositories>
-        <!-- 使用阿里云镜像仓库用来提高下载速度-->
-        <repository>
-            <id>aliyun</id>
-            <name>aliyun Repository</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>jitpack</id>
-            <name>jitpack.io</name>
-            <url>https://jitpack.io</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>aliyun</id>
-            <name>aliyun Repository</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
+    <!--    https://blog.csdn.net/KimmKing/article/details/82421220-->
 </project>
