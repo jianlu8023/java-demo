@@ -19,6 +19,7 @@
         <module>java-demo-multi-datasource</module>
         <module>java-demo-utils</module>
         <module>java-demo-mybatisplus-batchinsert</module>
+        <module>java-demo-format</module>
     </modules>
 
     <properties>
