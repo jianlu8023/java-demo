@@ -15,7 +15,7 @@
     <description>java-demo</description>
 
     <modules>
-        <module>java-demo-docker-deployment</module>
+        <module>java-demo-docker-deploy</module>
         <module>java-demo-multi-datasource</module>
         <module>java-demo-utils</module>
         <module>java-demo-mybatisplus-batchinsert</module>
@@ -26,7 +26,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.7.16</spring-boot.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
         <grpc.version>1.26.0</grpc.version>
         <os-maven-plugin.version>1.5.0.Final</os-maven-plugin.version>
