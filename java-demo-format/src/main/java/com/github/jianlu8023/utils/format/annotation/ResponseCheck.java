@@ -1,4 +1,4 @@
-package com.github.jianlu8023.annotation;
+package com.github.jianlu8023.utils.format.annotation;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -8,5 +8,5 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @ResponseBody
-public @interface ResponseBodyCheck {
+public @interface ResponseCheck {
 }

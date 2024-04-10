@@ -1,4 +1,4 @@
-package com.github.jianlu8023.format;
+package com.github.jianlu8023.utils.format.response;
 
 public enum ResponseStatus {
 
