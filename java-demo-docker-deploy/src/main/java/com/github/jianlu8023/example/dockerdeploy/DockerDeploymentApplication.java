@@ -1,4 +1,4 @@
-package com.github.jianlu8023.dockerdeployment;
+package com.github.jianlu8023.example.dockerdeploy;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
