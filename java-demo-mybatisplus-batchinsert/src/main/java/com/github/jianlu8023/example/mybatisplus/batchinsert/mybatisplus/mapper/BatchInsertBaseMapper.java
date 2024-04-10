@@ -1,4 +1,4 @@
-package com.github.jianlu8023.mybatisplus.batchinsert.mybatisplus.mapper;
+package com.github.jianlu8023.example.mybatisplus.batchinsert.mybatisplus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.*;
 

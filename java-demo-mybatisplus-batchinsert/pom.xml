@@ -11,7 +11,7 @@
         <version>1.0.0-ALPHA</version>
     </parent>
 
-    <groupId>com.github.jianlu8023.mybatisplus.batchinsert</groupId>
+    <groupId>com.github.jianlu8023.example</groupId>
     <artifactId>java-demo-mybatisplus-batchinsert</artifactId>
     <version>1.0.0-ALPHA</version>
 
@@ -54,7 +54,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.github.jianlu8023.mybatisplus.batchinsert.BatchInsertApplication</mainClass>
+                    <mainClass>com.github.jianlu8023.example.mybatisplus.batchinsert.BatchInsertApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

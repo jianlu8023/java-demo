@@ -1,9 +1,9 @@
-package com.github.jianlu8023.mybatisplus.batchinsert.mybatisplus.config;
+package com.github.jianlu8023.example.mybatisplus.batchinsert.mybatisplus.config;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.plugins.*;
 import com.baomidou.mybatisplus.extension.plugins.inner.*;
-import com.github.jianlu8023.mybatisplus.batchinsert.mybatisplus.injector.*;
+import com.github.jianlu8023.example.mybatisplus.batchinsert.mybatisplus.injector.*;
 import org.springframework.context.annotation.*;
 
 @Configuration

@@ -1,9 +1,9 @@
-package com.github.jianlu8023.mybatisplus.batchinsert.web.controller;
+package com.github.jianlu8023.example.mybatisplus.batchinsert.web.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.*;
-import com.github.jianlu8023.mybatisplus.batchinsert.web.entity.*;
-import com.github.jianlu8023.mybatisplus.batchinsert.web.mapper.*;
-import com.github.jianlu8023.mybatisplus.batchinsert.web.service.*;
+import com.github.jianlu8023.example.mybatisplus.batchinsert.web.entity.*;
+import com.github.jianlu8023.example.mybatisplus.batchinsert.web.mapper.*;
+import com.github.jianlu8023.example.mybatisplus.batchinsert.web.service.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 

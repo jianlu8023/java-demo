@@ -1,4 +1,4 @@
-package com.github.jianlu8023.mybatisplus.batchinsert.web.entity;
+package com.github.jianlu8023.example.mybatisplus.batchinsert.web.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import net.datafaker.*;

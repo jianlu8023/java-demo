@@ -1,4 +1,4 @@
-package com.github.jianlu8023.mybatisplus.batchinsert;
+package com.github.jianlu8023.example.mybatisplus.batchinsert;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
