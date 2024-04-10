@@ -12,7 +12,7 @@
         <version>1.0.0-ALPHA</version>
     </parent>
 
-    <groupId>com.github.jianlu8023</groupId>
+    <groupId>com.github.jianlu8023.example</groupId>
     <artifactId>java-demo-multi-datasource</artifactId>
     <version>1.0.0.ALPHA</version>
 
@@ -52,7 +52,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.github.jianlu8023.multidatasource.MultiDataSourceApplication</mainClass>
+                    <mainClass>com.github.jianlu8023.example.multidb.MultiDataSourceApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

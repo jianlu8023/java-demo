@@ -1,4 +1,4 @@
-package com.github.jianlu8023.multidatasource;
+package com.github.jianlu8023.example.multidb;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;

@@ -1,4 +1,4 @@
-package com.github.jianlu8023.multidatasource.web.datasource1.controller;
+package com.github.jianlu8023.example.multidb.web.db1.controller;
 
 import org.springframework.web.bind.annotation.*;
 
