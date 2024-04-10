@@ -11,7 +11,7 @@
         <version>1.0.0-ALPHA</version>
     </parent>
 
-    <groupId>com.github.jianlu8023</groupId>
+    <groupId>com.github.jianlu8023.utils</groupId>
     <artifactId>java-demo-utils</artifactId>
     <version>1.0.0-ALPHA</version>
 
