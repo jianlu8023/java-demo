@@ -11,10 +11,10 @@ import org.springframework.context.annotation.*;
 public class FormatAutoConfiguration {
 
     @Bean
-    @ConditionalOnClass(GlobalExceptionHandler.class)
-    GlobalExceptionHandler globalExceptionHandler() {
+    @ConditionalOnClass(GlobalExceptionAdvice.class)
+    GlobalExceptionAdvice globalExceptionHandler() {
         log.info("inject globalExceptionHandler...");
-        return new GlobalExceptionHandler();
+        return new GlobalExceptionAdvice();
     }
 
     @Bean

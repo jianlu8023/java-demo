@@ -14,7 +14,7 @@
 
     <groupId>com.github.jianlu8023.utils</groupId>
     <artifactId>format-spring-boot-starter</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>1.0.0.RELEASE</version>
 
     <name>format-spring-boot-starter</name>
 

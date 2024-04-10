@@ -14,7 +14,7 @@ import java.util.*;
 
 @RestControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler {
+public class GlobalExceptionAdvice {
 
     @ExceptionHandler({Exception.class})
     public ApiResponse<?> exception(Exception e) {
@@ -37,6 +37,10 @@ public class GlobalExceptionHandler {
             log.error("请求参数类型错误：", e);
             MethodArgumentTypeMismatchException ex = (MethodArgumentTypeMismatchException) e;
             return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), "请求参数类型不正确：" + ex.getName());
+        } else if (e instanceof MissingServletRequestParameterException) {
+            log.error("请求参数缺失：", e);
+            MissingServletRequestParameterException ex = (MissingServletRequestParameterException) e;
+            return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), "请求参数缺少: " + ex.getParameterName());
         } else if (e instanceof NoHandlerFoundException) {
             NoHandlerFoundException ex = (NoHandlerFoundException) e;
             log.error("请求地址不存在：", e);
@@ -56,12 +60,6 @@ public class GlobalExceptionHandler {
         String parameterName = ex.getParameterName();
         log.error("缺少必填参数 {}", ex.getMessage());
         return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), String.format("缺少必填参数: %s", parameterName));
-    }
-
-    @ExceptionHandler({MissingServletRequestParameterException.class})
-    public ApiResponse<String> missingServletRequestParameterException(MissingServletRequestParameterException ex) {
-        log.error("请求参数缺失：", ex);
-        return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), "请求参数缺少: " + ex.getParameterName());
     }
 
     /**
