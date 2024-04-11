@@ -31,16 +31,13 @@ public class GlobalExceptionAdvice {
             log.error("参数检验异常 {} ", methodArgumentNotValidException.getMessage(), methodArgumentNotValidException);
             return ApiResponse.error(ResponseStatus.PARAM_ERROR, map);
         } else if (e instanceof HttpRequestMethodNotSupportedException) {
-            log.error("请求方法错误：", e);
-            return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), "请求方法不正确");
+            HttpRequestMethodNotSupportedException ex = (HttpRequestMethodNotSupportedException) e;
+            log.error("请求方法错误：", ex);
+            return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), String.format("请求方法不正确 %s 不支持", ex.getMethod()));
         } else if (e instanceof MethodArgumentTypeMismatchException) {
             log.error("请求参数类型错误：", e);
             MethodArgumentTypeMismatchException ex = (MethodArgumentTypeMismatchException) e;
             return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), "请求参数类型不正确：" + ex.getName());
-        } else if (e instanceof MissingServletRequestParameterException) {
-            log.error("请求参数缺失：", e);
-            MissingServletRequestParameterException ex = (MissingServletRequestParameterException) e;
-            return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), "请求参数缺少: " + ex.getParameterName());
         } else if (e instanceof NoHandlerFoundException) {
             NoHandlerFoundException ex = (NoHandlerFoundException) e;
             log.error("请求地址不存在：", e);
@@ -51,6 +48,13 @@ public class GlobalExceptionAdvice {
             return ApiResponse.error(ResponseStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    /*
+   else if (e instanceof MissingServletRequestParameterException) {
+            log.error("请求参数缺失：", e);
+            MissingServletRequestParameterException ex = (MissingServletRequestParameterException) e;
+            return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), "请求参数缺少: " + ex.getParameterName());
+        }
+     */
 
     /**
      * 参数缺失异常处理

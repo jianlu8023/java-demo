@@ -6,20 +6,31 @@ public enum ResponseStatus {
 
     FAILURE(201, "操作失败"),
 
-    ERROR(506, "系統異常，請稍後重試"),
-    INTERNAL_SERVER_ERROR(500, "服務器異常"),
-    METHOD_IMPLEMENTED(501, "請求方法未實現"),
-    BAD_GATEWAY(502, "無效相應"),
-    BAD_REQUEST(400, "請求錯誤"),
+    ERROR(506, "系统异常，请稍后重试"),
+
+    INTERNAL_SERVER_ERROR(500, "服务器异常"),
+
+    METHOD_IMPLEMENTED(501, "请求方法未实现"),
+
+    BAD_GATEWAY(502, "无效响应"),
+
+    BAD_REQUEST(400, "请求错误"),
 
     PARAM_ERROR(1000, "参数异常"),
 
     INVALID_TOKEN(2001, "访问令牌不合法"),
+
     ACCESS_DENIED(2002, "没有权限访问该资源");
 
 
+    /**
+     * 消息
+     */
     private String message;
 
+    /**
+     * 响应码
+     */
     private Integer code;
 
     ResponseStatus(Integer code, String message) {
