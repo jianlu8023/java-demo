@@ -15,10 +15,10 @@
     <description>java-demo</description>
 
     <modules>
-        <module>java-demo-docker-deployment</module>
-        <module>java-demo-multi-datasource</module>
-        <module>java-demo-utils</module>
-        <module>java-demo-mybatisplus-batchinsert</module>
+        <!-- <module>java-demo-docker-deploy</module> -->
+        <!-- <module>java-demo-multi-datasource</module> -->
+        <!-- <module>java-demo-utils</module> -->
+        <!-- <module>java-demo-mybatisplus-batchinsert</module> -->
     </modules>
 
     <properties>
