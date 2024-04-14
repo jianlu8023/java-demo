@@ -26,12 +26,12 @@ public enum ResponseStatus {
     /**
      * 消息
      */
-    private String message;
+    private final String message;
 
     /**
      * 响应码
      */
-    private Integer code;
+    private final Integer code;
 
     ResponseStatus(Integer code, String message) {
         this.code = code;
