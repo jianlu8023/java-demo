@@ -14,3 +14,6 @@ spring:
     image:
       pixelmode: text
     location: classpath*:banner.txt
+  main:
+    banner-mode: console
+    allow-bean-definition-overriding: true

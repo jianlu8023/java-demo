@@ -1,2 +1,6 @@
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
+  file:
+    path: ./logs
+  level:
+    com.github.jianlu8023.example: info
