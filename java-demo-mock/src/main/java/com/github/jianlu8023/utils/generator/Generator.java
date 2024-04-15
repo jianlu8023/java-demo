@@ -4,10 +4,16 @@ import java.util.*;
 
 public abstract class Generator {
 
-    abstract String generator();
+    public abstract String generator();
 
-    private Random random = null;
+    private static Random random = null;
 
+    protected Random getRandomInstance() {
+        if (random == null) {
+            random = new Random(new Date().getTime());
+        }
 
+        return random;
+    }
 
 }
