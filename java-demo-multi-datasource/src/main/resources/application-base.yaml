@@ -6,3 +6,9 @@ server:
 logging:
   level:
     com.baomidou: info
+
+spring:
+  banner:
+    charset: UTF-8
+  main:
+    banner-mode: off

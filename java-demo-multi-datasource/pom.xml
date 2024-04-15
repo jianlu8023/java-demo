@@ -38,10 +38,21 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
+
+        <!--
+            集成pagehelper时，去除 jsqlparser 依赖版本, 使用mybatisplus中的 jsqlparser 版本
+            原因： jsqlparser版本与mybatisplus中jsqlparser不同，导致无法注入依赖，启动项目失败
+        -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper-spring-boot-starter.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.jsqlparser</groupId>
+                    <artifactId>jsqlparser</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
