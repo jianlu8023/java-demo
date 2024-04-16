@@ -3,15 +3,18 @@ package com.github.jianlu8023.utils.generator.mobile;
 import com.github.jianlu8023.utils.generator.*;
 import org.apache.commons.lang3.*;
 
-public class ChineseMobileNumberGenerator extends Generator {
-    private static final ChineseMobileNumberGenerator instance = new ChineseMobileNumberGenerator();
+public class ChineseMobileNumberGenerator extends AbstractGenerator<String> {
+
+    private static class SingleHolder {
+        private static final ChineseMobileNumberGenerator INSTANCE = new ChineseMobileNumberGenerator();
+    }
+
 
     private ChineseMobileNumberGenerator() {
     }
 
-
     public static ChineseMobileNumberGenerator newInstance() {
-        return instance;
+        return SingleHolder.INSTANCE;
     }
 
     private static final int[] MOBILE_PREFIX = new int[]{133, 153, 177, 180,
@@ -21,7 +24,7 @@ public class ChineseMobileNumberGenerator extends Generator {
 
 
     @Override
-    public String generator() {
+    public String generate() {
         return genMobilePre() + StringUtils
                 .leftPad(String.valueOf(RandomUtils.nextInt(0, 99999999 + 1)), 8, "0");
     }
@@ -39,7 +42,9 @@ public class ChineseMobileNumberGenerator extends Generator {
     }
 
     public static void main(String[] args) {
-        Generator generator=new ChineseMobileNumberGenerator();
-        System.out.println(generator.generator());
+        ChineseMobileNumberGenerator generator = ChineseMobileNumberGenerator.newInstance();
+        for (int i = 0; i < 100; i++) {
+            System.out.println(generator.generate());
+        }
     }
 }

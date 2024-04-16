@@ -1,19 +1,10 @@
 package com.github.jianlu8023.utils.generator;
 
-import java.util.*;
+import java.lang.reflect.*;
 
-public abstract class Generator {
+public interface Generator<T> {
 
-    public abstract String generator();
+    T generate();
 
-    private static Random random = null;
-
-    protected Random getRandomInstance() {
-        if (random == null) {
-            random = new Random(new Date().getTime());
-        }
-
-        return random;
-    }
-
+    T generate(Class<T> clazz) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException;
 }
