@@ -33,6 +33,8 @@ public class MybatisPlusPaginationTest {
         List<User> insert = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             User mock = pojoGenerator.generate(User.class);
+            mock.setCreateTime(new Date());
+            mock.setUpdateTime(new Date());
             insert.add(mock);
         }
         insert.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));

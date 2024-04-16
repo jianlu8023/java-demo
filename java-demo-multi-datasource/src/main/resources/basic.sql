@@ -40,14 +40,14 @@ CREATE TABLE IF NOT EXISTS `file` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `uid` bigint NOT NULL AUTO_INCREMENT,
-  `userName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户名',
+  `userName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
   `userNick` varchar(100) COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户昵称',
   `userAge` int NOT NULL COMMENT '用户年龄',
   `userEmail` varchar(100) COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户emial',
   `userGender` tinyint NOT NULL COMMENT '用户性别',
   `userId` varchar(100) COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户身份证号',
-  `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建时间',
-  `updateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新信息时间',
+  `createTime` datetime NOT NULL  COMMENT '用户创建时间',
+  `updateTime` datetime NOT NULL COMMENT '更新信息时间',
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户信息表';
 
