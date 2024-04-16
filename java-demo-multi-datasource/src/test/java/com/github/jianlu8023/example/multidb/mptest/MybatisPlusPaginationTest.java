@@ -1,9 +1,11 @@
 package com.github.jianlu8023.example.multidb.mptest;
 
+import com.baomidou.mybatisplus.core.conditions.query.*;
 import com.github.jianlu8023.example.multidb.web.db1.entity.*;
 import com.github.jianlu8023.example.multidb.web.db1.service.*;
-import com.github.jianlu8023.utils.generator.identity.*;
-import com.github.jsonzou.jmockdata.*;
+import com.github.jianlu8023.utils.generator.pojo.*;
+import com.github.jianlu8023.utils.generator.utils.*;
+import com.github.pagehelper.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
@@ -14,7 +16,7 @@ import java.util.*;
 public class MybatisPlusPaginationTest {
 
     @Autowired
-    private IdentityIDGenerator idGenerator;
+    private PojoGenerator<User> pojoGenerator;
 
     @Autowired
     private UserService userService;
@@ -28,25 +30,31 @@ public class MybatisPlusPaginationTest {
     }
 
     void insert(Integer size) {
-
-        MockConfig mockConfig = new MockConfig();
-        mockConfig.excludes(User.class, "uid", "createTime", "updateTime");
-        mockConfig.subConfig(User.class, "userAge").intRange(10, 80);
-        mockConfig.subConfig(User.class, "userGender").intRange(0, 1);
-        mockConfig.subConfig(User.class, "userEmail").stringRegex("[a-z0-9]{5,15}\\@\\w{3,5}\\.[a-z]{2,3}");
-
         List<User> insert = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            User mock = JMockData.mock(User.class, mockConfig);
-            mock.setUserId(idGenerator.generator());
+            User mock = pojoGenerator.generate(User.class);
             insert.add(mock);
         }
+        insert.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));
         userService.saveBatch(insert);
     }
 
     @Test
     void paginationTest() {
         init(100);
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.orderByAsc(User::getUserId);
+        long count = userService.count(wrapper);
+
+        long pageSum = count / 5 == 0 ? (count / 5) : ((count / 5) + 1);
+
+
+        for (int i = 0; i < pageSum; i++) {
+            PageHelper.startPage(i, 5, true);
+
+            List<User> list = new PageInfo<>(userService.list(wrapper)).getList();
+            list.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));
+        }
     }
 
 }

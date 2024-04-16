@@ -20,7 +20,8 @@
     <properties>
         <pagehelper-spring-boot-starter.version>2.1.0</pagehelper-spring-boot-starter.version>
         <dynamic-datasource-spring-boot-starter.version>4.3.0</dynamic-datasource-spring-boot-starter.version>
-        <mybatis-plus-boot-starter.version>3.5.3.2</mybatis-plus-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.5.5</mybatis-plus-boot-starter.version>
+        <!--<mybatis-plus-boot-starter.version>3.5.3.2</mybatis-plus-boot-starter.version>-->
         <mysql-connector-j.version>8.2.0</mysql-connector-j.version>
         <jmockdata.version>4.3.0</jmockdata.version>
     </properties>
@@ -42,10 +43,7 @@
             <version>${mysql-connector-j.version}</version>
         </dependency>
 
-        <!--
-            集成pagehelper时，去除 jsqlparser 依赖版本, 使用mybatisplus中的 jsqlparser 版本
-            原因： jsqlparser版本与mybatisplus中jsqlparser不同，导致无法注入依赖，启动项目失败
-        -->
+
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -62,20 +60,38 @@
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
             <version>${dynamic-datasource-spring-boot-starter.version}</version>
         </dependency>
+        <!--
+            排除 jsqlparser
+                pagehelper中     4.7
+                mybatisplus中    4.6
+            两个jsqlparser差异大
+            添加sqlparser4.5依赖解决此问题
+            https://github.com/pagehelper/Mybatis-PageHelper/issues/802
+            https://github.com/pagehelper/Mybatis-PageHelper/releases/tag/v6.1.0
+        -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
+            <!--<artifactId>mybatis-plus-spring-boot3-starter</artifactId>-->
             <version>${mybatis-plus-boot-starter.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.jsqlparser</groupId>
+                    <artifactId>jsqlparser</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>sqlparser4.5</artifactId>
+            <version>6.1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.github.jianlu8023.utils</groupId>
             <artifactId>mock-spring-boot-starter</artifactId>
             <version>1.0.0.ALPHA</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.jsonzou</groupId>
-            <artifactId>jmockdata</artifactId>
-            <version>${jmockdata.version}</version>
         </dependency>
     </dependencies>
 
