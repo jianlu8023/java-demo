@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Main-Class: com.github.jianlu8023.example.mybatisplus.batchinsert.BatchI
+ nsertApplication
+Class-Path: spring-boot-starter-test-2.7.18.jar spring-webmvc-5.3.31.jar
+  spring-boot-test-2.7.18.jar spring-context-5.3.31.jar mockito-core-4.5
+ .1.jar byte-buddy-agent-1.12.23.jar json-smart-2.4.11.jar slf4j-api-1.7
+ .36.jar mybatis-plus-extension-3.5.3.2.jar spring-aop-5.3.31.jar snakey
+ aml-1.30.jar spring-tx-5.3.31.jar tomcat-embed-websocket-9.0.83.jar hut
+ ool-all-5.8.25.jar jakarta.activation-api-1.2.2.jar junit-platform-comm
+ ons-1.8.2.jar xmlunit-core-2.9.1.jar spring-boot-test-autoconfigure-2.7
+ .18.jar jakarta.xml.bind-api-2.3.3.jar hamcrest-2.2.jar mybatis-plus-co
+ re-3.5.3.2.jar spring-boot-starter-json-2.7.18.jar json-path-2.7.0.jar 
+ mybatis-plus-annotation-3.5.3.2.jar apiguardian-api-1.1.2.jar jakarta.a
+ nnotation-api-1.3.5.jar jackson-databind-2.13.5.jar logback-classic-1.2
+ .12.jar mockito-junit-jupiter-4.5.1.jar HikariCP-4.0.3.jar spring-boot-
+ 2.7.18.jar spring-boot-starter-tomcat-2.7.18.jar jackson-datatype-jsr31
+ 0-2.13.5.jar spring-jdbc-5.3.31.jar spring-expression-5.3.31.jar junit-
+ jupiter-5.8.2.jar generex-1.0.2.jar log4j-to-slf4j-2.17.2.jar spring-bo
+ ot-starter-logging-2.7.18.jar spring-beans-5.3.31.jar spring-boot-autoc
+ onfigure-2.7.18.jar junit-jupiter-engine-5.8.2.jar automaton-1.11-8.jar
+  byte-buddy-1.12.23.jar jsonassert-1.5.1.jar junit-jupiter-api-5.8.2.ja
+ r mybatis-plus-boot-starter-3.5.3.2.jar logback-core-1.2.12.jar asm-9.3
+ .jar assertj-core-3.22.0.jar jackson-core-2.13.5.jar jackson-module-par
+ ameter-names-2.13.5.jar spring-jcl-5.3.31.jar tomcat-embed-core-9.0.83.
+ jar tomcat-embed-el-9.0.83.jar mybatis-3.5.13.jar opentest4j-1.2.0.jar 
+ spring-web-5.3.31.jar accessors-smart-2.4.11.jar mybatis-plus-3.5.3.2.j
+ ar spring-test-5.3.31.jar datafaker-1.4.0.jar objenesis-3.2.jar spring-
+ core-5.3.31.jar log4j-api-2.17.2.jar mysql-connector-j-8.0.33.jar sprin
+ g-boot-starter-jdbc-2.7.18.jar jul-to-slf4j-1.7.36.jar spring-boot-star
+ ter-2.7.18.jar android-json-0.0.20131108.vaadin1.jar junit-platform-eng
+ ine-1.8.2.jar jackson-datatype-jdk8-2.13.5.jar jsqlparser-4.6.jar sprin
+ g-boot-starter-web-2.7.18.jar junit-jupiter-params-5.8.2.jar jackson-an
+ notations-2.13.5.jar mybatis-spring-2.1.1.jar
+
