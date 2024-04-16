@@ -41,19 +41,24 @@ public class MybatisPlusPaginationTest {
 
     @Test
     void paginationTest() {
-        init(100);
+        init(200);
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.orderByAsc(User::getUserId);
         long count = userService.count(wrapper);
 
         long pageSum = count / 5 == 0 ? (count / 5) : ((count / 5) + 1);
 
-
-        for (int i = 0; i < pageSum; i++) {
+        for (int i = 1; i <= pageSum; i++) {
             PageHelper.startPage(i, 5, true);
-
             List<User> list = new PageInfo<>(userService.list(wrapper)).getList();
             list.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));
+        }
+        System.out.println("-------------------------------------------------------");
+
+        for (int i = 1; i <= pageSum; i++) {
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<User> page1 = userService.page(new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(i, 5), wrapper);
+            List<User> records = page1.getRecords();
+            records.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));
         }
     }
 
