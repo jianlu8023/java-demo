@@ -24,6 +24,8 @@
         <!--<mybatis-plus-boot-starter.version>3.5.3.2</mybatis-plus-boot-starter.version>-->
         <mysql-connector-j.version>8.2.0</mysql-connector-j.version>
         <jmockdata.version>4.3.0</jmockdata.version>
+        <mock-spring-boot-starter.version>1.0.0.ALPHA</mock-spring-boot-starter.version>
+        <sqlparser4.5.version>6.1.0</sqlparser4.5.version>
     </properties>
 
     <name>java-demo-multi-datasource</name>
@@ -85,13 +87,13 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>sqlparser4.5</artifactId>
-            <version>6.1.0</version>
+            <version>${sqlparser4.5.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.jianlu8023.utils</groupId>
             <artifactId>mock-spring-boot-starter</artifactId>
-            <version>1.0.0.ALPHA</version>
+            <version>${mock-spring-boot-starter.version}</version>
         </dependency>
     </dependencies>
 
