@@ -1,12 +1,4 @@
-server:
-  port: 8080
-
+# https://gitee.com/baomidou/mybatis-plus-samples/tree/master
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 123456
-    username: root
-    url: jdbc:mysql://127.0.0.1:3306/basic
-mybatis-plus:
-  global-config:
-    banner: false
+  profiles:
+    active: base,db,log
