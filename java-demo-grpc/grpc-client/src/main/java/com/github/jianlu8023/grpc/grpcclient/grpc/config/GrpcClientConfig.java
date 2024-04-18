@@ -12,9 +12,12 @@ public class GrpcClientConfig {
     @Value("${grpc.port:9092}")
     private Integer port;
 
+    @Value("${grpc.ip:192.168.58.110}")
+    private String ip;
+
     @Bean
     public ManagedChannel getChannel() {
-        return ManagedChannelBuilder.forAddress("192.168.58.131", port)
+        return ManagedChannelBuilder.forAddress(ip, port)
                 .usePlaintext()
                 .build();
     }
