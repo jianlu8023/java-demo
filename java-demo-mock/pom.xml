@@ -24,6 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons-lang3.version>3.10</commons-lang3.version>
         <jmockdata.version>4.3.0</jmockdata.version>
+        <javafaker.version>1.0.2</javafaker.version>
     </properties>
 
     <dependencies>
@@ -60,7 +61,7 @@
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
-            <version>1.0.2</version> <!-- Use the latest version available -->
+            <version>${javafaker.version}</version> <!-- Use the latest version available -->
         </dependency>
     </dependencies>
 
