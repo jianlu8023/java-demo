@@ -17,3 +17,7 @@ spring:
   main:
     banner-mode: console
     allow-bean-definition-overriding: true
+server:
+  port: 8089
+  servlet:
+    context-path: /logging

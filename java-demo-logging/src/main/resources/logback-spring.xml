@@ -11,6 +11,17 @@
     配置自动扫面时间间隔（单位可以是：milliseconds, seconds, minutes
     or hours，默认为：milliseconds）， 默认为1分钟，scan="true"时该配置才会生效 -->
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!--定义日志文件的存储地址，使用Spring的属性文件配置方式-->
+    <springProperty scope="context" name="log.home" source="log.home" defaultValue="logs"/>
+
+    <!-- date 格式定义 -->
+    <property name="LOG_DATEFORMAT" value="yyyy-MM-dd"/>
+
+    <!-- 定义日志归档文件名称格式，每天生成一个日志文件 -->
+    <property name="ARCHIVE_PATTERN"
+              value="${log.home}/%d{${LOG_DATEFORMAT}}/sys-info-%d{${LOG_DATEFORMAT}}-%i.log.gz"/>
+
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
     <property name="log.home" value="${LOG_PATH:- }"/>
     <!--
@@ -74,14 +85,24 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为每天产生一个文件 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为根据大小 -->
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${log.home}/sys-info.log.%d{yyyy-MM-dd}.zip</FileNamePattern>
+            <!--<fileNamePattern>${log.home}/sys-info.log.%d{yyyy-MM-dd}.zip</fileNamePattern>-->
+            <fileNamePattern>${ARCHIVE_PATTERN}</fileNamePattern>
             <!--日志文件保留天数-->
             <maxHistory>30</maxHistory>
-            <!--<maxFileSize>100MB</maxFileSize>-->
+            <!--定义日志文件切割的阈值，本例是 100MB-->
+            <maxFileSize>100MB</maxFileSize>
             <!--<totalSizeCap>3GB</totalSizeCap>-->
+            <!-- 删除过期文件 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <!-- zip 压缩生成的归档文件 -->
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${FILE_LOG_PATTERN}</pattern>
@@ -120,7 +141,19 @@
         </triggeringPolicy>
     </appender>
 
-    <logger name="com.github.jianlu8023.example.logging.schedule.logdemo" level="trace" additivity="false">
+    <!--异步输出日志信息-->
+    <appender name="asyncFile" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>256</queueSize>
+        <appender-ref ref="sys_info"/>
+    </appender>
+
+    <!--定义所有组件的日志级别，如所有 DEBUG-->
+    <!--
+         additivity="false" 的属性，这其实是因为 logger 这个标签在锁定某个目录时，可能会发生层级关系。
+
+    -->
+    <logger name="com.github.jianlu8023.example.logging.schedule.logdemo" level="TRACE" additivity="false">
         <appender-ref ref="console"/>
     </logger>
 
