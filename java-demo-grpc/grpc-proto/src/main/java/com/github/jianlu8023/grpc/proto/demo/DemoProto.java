@@ -34,10 +34,10 @@ public final class DemoProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\ndemo.proto\"\032\n\013DemoRequest\022\013\n\003msg\030\001 \001(\t" +
-      "\"\033\n\014DemoResponse\022\013\n\003msg\030\001 \001(\t2+\n\004Demo\022#\n" +
-      "\004demo\022\014.DemoRequest\032\r.DemoResponseB4\n%co" +
-      "m.github.jianlu8023.grpc.proto.demoB\tDem" +
-      "oProtoP\001b\006proto3"
+      "\"\033\n\014DemoResponse\022\013\n\003msg\030\001 \001(\t22\n\013DemoSer" +
+      "vice\022#\n\004demo\022\014.DemoRequest\032\r.DemoRespons" +
+      "eB4\n%com.github.jianlu8023.grpc.proto.de" +
+      "moB\tDemoProtoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

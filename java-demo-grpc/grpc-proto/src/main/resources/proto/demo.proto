@@ -15,6 +15,6 @@ message DemoResponse{
 }
 
 
-service Demo{
+service DemoService{
   rpc demo(DemoRequest) returns(DemoResponse);
 }
