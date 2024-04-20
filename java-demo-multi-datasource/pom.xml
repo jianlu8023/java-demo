@@ -26,6 +26,7 @@
         <jmockdata.version>4.3.0</jmockdata.version>
         <mock-spring-boot-starter.version>1.0.0.ALPHA</mock-spring-boot-starter.version>
         <sqlparser4.5.version>6.1.0</sqlparser4.5.version>
+        <p6spy.version>3.9.1</p6spy.version>
     </properties>
 
     <name>java-demo-multi-datasource</name>
@@ -94,6 +95,12 @@
             <groupId>com.github.jianlu8023.utils</groupId>
             <artifactId>mock-spring-boot-starter</artifactId>
             <version>${mock-spring-boot-starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>${p6spy.version}</version>
         </dependency>
     </dependencies>
 

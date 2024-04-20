@@ -37,28 +37,30 @@ public class MybatisPlusPaginationTest {
             mock.setUpdateTime(new Date());
             insert.add(mock);
         }
-        insert.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));
-        userService.saveBatch(insert);
+        // insert.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));
+        // userService.saveBatch(insert);
+        userService.insertBatch(insert);
     }
 
     @Test
     void paginationTest() {
-        init(200);
+        int pageSize = 10;
+        init(1000);
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.orderByAsc(User::getUserId);
+        wrapper.orderByAsc(User::getUid);
         long count = userService.count(wrapper);
 
-        long pageSum = count / 5 == 0 ? (count / 5) : ((count / 5) + 1);
+        long pageSum = count / pageSize == 0 ? (count / pageSize) : ((count / pageSize) + 1);
 
         for (int i = 1; i <= pageSum; i++) {
-            PageHelper.startPage(i, 5, true);
+            PageHelper.startPage(i, pageSize, false);
             List<User> list = new PageInfo<>(userService.list(wrapper)).getList();
             list.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));
         }
         System.out.println("-------------------------------------------------------");
 
         for (int i = 1; i <= pageSum; i++) {
-            com.baomidou.mybatisplus.extension.plugins.pagination.Page<User> page1 = userService.page(new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(i, 5), wrapper);
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<User> page1 = userService.page(new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(i, pageSize, false), wrapper);
             List<User> records = page1.getRecords();
             records.forEach(entity -> System.out.println(JsonUtils.toJSONString(entity)));
         }

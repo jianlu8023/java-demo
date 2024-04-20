@@ -3,6 +3,8 @@ package com.github.jianlu8023.example.multidb.web.db1.service;
 import com.github.jianlu8023.example.multidb.web.db1.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.*;
+
 /**
 * @author root
 * @description 针对表【user(用户信息表)】的数据库操作Service
@@ -10,4 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserService extends IService<User> {
 
+
+    Integer insertBatch(Collection<User> insert);
 }

@@ -1,8 +1,8 @@
 package com.github.jianlu8023.example.multidb.web.db1.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.*;
+import com.github.jianlu8023.example.multidb.mybatisplus.mapper.*;
 import com.github.jianlu8023.example.multidb.web.db1.entity.*;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
 
 /**
  * @author root
@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Entity com.github.jianlu8023.example.multidb.web.db1.entity.User
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BatchInsertBaseMapper<User> {
 
 }
 

@@ -6,6 +6,8 @@ import com.github.jianlu8023.example.multidb.web.db1.service.UserService;
 import com.github.jianlu8023.example.multidb.web.db1.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 /**
 * @author root
 * @description 针对表【user(用户信息表)】的数据库操作Service实现
@@ -14,6 +16,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
+    @Override
+    public Integer insertBatch(Collection<User> insert) {
+        return this.baseMapper.insertBatchSomeColumn(insert);
+    }
 
 }
 
