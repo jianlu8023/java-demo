@@ -9,7 +9,7 @@ public class LoggingSchedule {
 
     private static final Logger L = LoggerFactory.getLogger(LoggingSchedule.class);
 
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0/3 * * * * *")
     public void loggingDemo() {
         L.info("info testing...");
         L.debug("debug testing...");
