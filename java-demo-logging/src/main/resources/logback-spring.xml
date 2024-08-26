@@ -22,10 +22,10 @@
 
     <!-- 定义日志归档文件名称格式，每天生成一个日志文件 -->
     <property name="ARCHIVE_PATTERN"
-              value="${LogPath}/%d{${LOG_DATEFORMAT}}/sys-info-%d{${LOG_DATEFORMAT}}-%i.log.gz"/>
+              value="${LogPath}/%d{${LOG_DATEFORMAT}}/info-%d{${LOG_DATEFORMAT}}-%i.log.gz"/>
 
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="LogPath" value="${log.home:- }/${app.name}/"/>
+    <property name="LogPath" value="${log.home:- }/${app.name:-log}/"/>
     <!--
         格式化输出：
             %d表示日期，
@@ -53,9 +53,9 @@
         文件日志， 按照每天生成日志文件
         输出全部日志
         -->
-    <appender name="sys_all" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="all" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文件的路径及文件名 -->
-        <file>${LogPath}/sys-all.log</file>
+        <file>${LogPath}/all.log</file>
         <!--日志文件输出格式-->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${FILE_LOG_PATTERN}</pattern>
@@ -64,7 +64,7 @@
         <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为每天产生一个文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${LogPath}/sys-all-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <FileNamePattern>${LogPath}/all-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -87,8 +87,8 @@
         </triggeringPolicy>
     </appender>
 
-    <appender name="sys_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LogPath}/sys-info.log</file>
+    <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LogPath}/info.log</file>
         <!--级别过滤-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
@@ -126,8 +126,8 @@
         </triggeringPolicy>
     </appender>
 
-    <appender name="sys_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LogPath}/sys-error.log</file>
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LogPath}/error.log</file>
         <!--级别过滤-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
@@ -139,7 +139,7 @@
         <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为每天产生一个文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${log.home}/sys-error.log.%d{yyyy-MM-dd}.zip</FileNamePattern>
+            <FileNamePattern>${log.home}/error.log.%d{yyyy-MM-dd}.zip</FileNamePattern>
             <!--日志文件保留天数-->
             <maxHistory>30</maxHistory>
             <!--<maxFileSize>100MB</maxFileSize>-->
@@ -159,22 +159,25 @@
     <appender name="asyncFile" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
         <queueSize>256</queueSize>
-        <appender-ref ref="sys_info"/>
+        <appender-ref ref="info"/>
     </appender>
 
     <!--定义所有组件的日志级别，如所有 DEBUG-->
     <!--
          additivity="false" 的属性，这其实是因为 logger 这个标签在锁定某个目录时，可能会发生层级关系。
     -->
-    <logger name="com.github.jianlu8023.example.logging.schedule.logdemo" level="TRACE" additivity="false">
+    <logger name="com.fasterxml" level="TRACE" additivity="false">
         <appender-ref ref="console"/>
+        <appender-ref ref="all"/>
     </logger>
+
+    <logger name="org.springframework" level="warn"/>
 
     <!-- 日志输出级别 -->
     <root level="info">
         <appender-ref ref="console"/>
-        <appender-ref ref="sys_all"/>
-        <appender-ref ref="sys_error"/>
-        <appender-ref ref="sys_info"/>
+        <appender-ref ref="all"/>
+        <appender-ref ref="error"/>
+        <appender-ref ref="info"/>
     </root>
 </configuration>
