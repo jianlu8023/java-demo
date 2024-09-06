@@ -11,8 +11,21 @@
     配置自动扫面时间间隔（单位可以是：milliseconds, seconds, minutes
     or hours，默认为：milliseconds）， 默认为1分钟，scan="true"时该配置才会生效 -->
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!--定义日志文件的存储地址，使用Spring的属性文件配置方式-->
+    <!--读取spring配置文件上的属性-->
+    <springProperty scope="context" name="log.home" source="logging.file.path" defaultValue="logs"/>
+    <springProperty scope="context" name="app.name" source="spring.application.name"/>
+
+    <!-- date 格式定义 -->
+    <property name="LOG_DATEFORMAT" value="yyyy-MM-dd"/>
+
+    <!-- 定义日志归档文件名称格式，每天生成一个日志文件 -->
+    <property name="ARCHIVE_PATTERN"
+              value="${LogPath}/%d{${LOG_DATEFORMAT}}/info-%d{${LOG_DATEFORMAT}}-%i.log.gz"/>
+
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="log.home" value="${LOG_PATH:- }"/>
+    <property name="LogPath" value="${log.home:- }/${app.name:-log}/"/>
     <!--
         格式化输出：
             %d表示日期，
@@ -26,6 +39,8 @@
 
     <property name="FILE_LOG_PATTERN"
               value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%logger{60}] [%method:%line] : %msg%n"/>
+
+
     <!--控制台日志， 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -38,73 +53,93 @@
         文件日志， 按照每天生成日志文件
         输出全部日志
         -->
-    <appender name="sys_all" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.home}/sys-all.log</file>
+    <appender name="all" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LogPath}/all.log</file>
+        <!--日志文件输出格式-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为每天产生一个文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LogPath}/all-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--日志文件保留天数-->
+            <maxHistory>30</maxHistory>
+            <!--<maxFileSize>100MB</maxFileSize>-->
+            <!--<totalSizeCap>3GB</totalSizeCap>-->
+        </rollingPolicy>
+        <!-- 追加方式记录日志 -->
+        <append>true</append>
         <!--级别过滤-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ALL</level>
             <!--<onMatch>ACCEPT</onMatch>-->
             <!--<onMismatch>DENY</onMismatch>-->
         </filter>
-
-        <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为每天产生一个文件 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--日志文件输出的文件名-->
-            <FileNamePattern>${log.home}/sys-all.log.%d{yyyy-MM-dd}.zip</FileNamePattern>
-            <!--日志文件保留天数-->
-            <maxHistory>30</maxHistory>
-            <!--<maxFileSize>100MB</maxFileSize>-->
-            <!--<totalSizeCap>3GB</totalSizeCap>-->
-        </rollingPolicy>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
-        </encoder>
         <!--日志文件最大的大小-->
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
+            <maxFileSize>10MB</maxFileSize>
         </triggeringPolicy>
     </appender>
 
-    <appender name="sys_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.home}/sys-info.log</file>
+    <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LogPath}/info.log</file>
         <!--级别过滤-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为每天产生一个文件 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为根据大小 -->
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${log.home}/sys-info.log.%d{yyyy-MM-dd}.zip</FileNamePattern>
+            <!--<fileNamePattern>${log.home}/sys-info.log.%d{yyyy-MM-dd}.zip</fileNamePattern>-->
+            <fileNamePattern>${ARCHIVE_PATTERN}</fileNamePattern>
             <!--日志文件保留天数-->
             <maxHistory>30</maxHistory>
-            <!--<maxFileSize>100MB</maxFileSize>-->
+            <!--定义日志文件切割的阈值，本例是 100MB-->
+            <maxFileSize>100MB</maxFileSize>
             <!--<totalSizeCap>3GB</totalSizeCap>-->
+            <!-- 删除过期文件 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <!-- zip 压缩生成的归档文件 -->
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>utf8</charset>
         </encoder>
+        <!-- 追加方式记录日志 -->
+        <append>true</append>
         <!--日志文件最大的大小-->
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <MaxFileSize>10MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
 
-    <appender name="sys_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.home}/sys-error.log</file>
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LogPath}/error.log</file>
         <!--级别过滤-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
-            <OnMatch>ACCEPT</OnMatch>
-            <OnMismatch>DENY</OnMismatch>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
         </filter>
+        <!-- 追加方式记录日志 -->
+        <append>true</append>
         <!-- 文件滚动策略根据%d{patter}中的“patter”而定，此处为每天产生一个文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${log.home}/sys-error.log.%d{yyyy-MM-dd}.zip</FileNamePattern>
+            <FileNamePattern>${log.home}/error.log.%d{yyyy-MM-dd}.zip</FileNamePattern>
             <!--日志文件保留天数-->
             <maxHistory>30</maxHistory>
             <!--<maxFileSize>100MB</maxFileSize>-->
@@ -116,19 +151,33 @@
         </encoder>
         <!--日志文件最大的大小-->
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
+            <maxFileSize>10MB</maxFileSize>
         </triggeringPolicy>
     </appender>
 
-    <logger name="com.github.jianlu8023.example.logging.schedule.logdemo" level="trace" additivity="false">
+    <!--异步输出日志信息-->
+    <appender name="asyncFile" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>256</queueSize>
+        <appender-ref ref="info"/>
+    </appender>
+
+    <!--定义所有组件的日志级别，如所有 DEBUG-->
+    <!--
+         additivity="false" 的属性，这其实是因为 logger 这个标签在锁定某个目录时，可能会发生层级关系。
+    -->
+    <logger name="com.fasterxml" level="TRACE" additivity="false">
         <appender-ref ref="console"/>
+        <appender-ref ref="all"/>
     </logger>
+
+    <logger name="org.springframework" level="warn"/>
 
     <!-- 日志输出级别 -->
     <root level="info">
         <appender-ref ref="console"/>
-        <appender-ref ref="sys_all"/>
-        <appender-ref ref="sys_error"/>
-        <appender-ref ref="sys_info"/>
+        <appender-ref ref="all"/>
+        <appender-ref ref="error"/>
+        <appender-ref ref="info"/>
     </root>
 </configuration>

@@ -3,4 +3,4 @@
 
 spring:
   profiles:
-    active: db,base,log
+    active: db,base

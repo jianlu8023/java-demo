@@ -2,8 +2,10 @@ package com.github.jianlu8023.example.multidb;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
+import org.springframework.transaction.annotation.*;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class MultiDataSourceApplication {
 
     static {
