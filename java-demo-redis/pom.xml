@@ -64,7 +64,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.github.jianlu8023.example.javademoredis.JavaDemoRedisApplication</mainClass>
+                    <mainClass>com.github.jianlu8023.example.javademoredis.RedisApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>

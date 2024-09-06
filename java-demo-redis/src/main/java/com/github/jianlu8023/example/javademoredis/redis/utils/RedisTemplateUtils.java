@@ -7,24 +7,7 @@ import org.springframework.stereotype.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-/**
- * 简单描述(javadoc程序包界面里的类说明,末尾的句号必须保留)。
- * <p>
- * 详细描述
- * </p>
- *
- * <p>创建时间: 2023/12/4 下午12:39</p>
- * <p>公司信息: 中国科学院新疆理化技术研究所</p>
- * <p>版权所有：Copyright (c) 2023</p>
- *
- * @author ght
- * @since 1.8
- *
- * <p>修改记录</p>
- * <p>
- * 修改时间  修改人  修改内容
- * </p>
- */
+
 @Component
 public class RedisTemplateUtils {
 

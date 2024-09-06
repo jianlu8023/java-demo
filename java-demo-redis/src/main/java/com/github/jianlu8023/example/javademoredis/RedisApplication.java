@@ -2,12 +2,14 @@ package com.github.jianlu8023.example.javademoredis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.*;
 
 @SpringBootApplication
-public class JavaDemoRedisApplication {
+@EnableScheduling
+public class RedisApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaDemoRedisApplication.class, args);
+        SpringApplication.run(RedisApplication.class, args);
     }
 
 }
