@@ -8,16 +8,7 @@ import java.util.*;
 public class InterUtils {
 
 
-    /**
-     * 获取本机MAC地址，将所有网卡的MAC地址用冒号拼起来，当作本机的唯一标识。
-     * 因为需要考虑内网穿透场景的话，就可能发生不同内网中没有配置外网IP时，机子内网IP相同的情况。
-     * 所以不能简单的用内网IP当作机器标识，有外网IP用当然最好。
-     *
-     * create time: 2022/7/20 19:57
-     * create by: Zhgy
-     *
-     * @return String
-     */
+
     private static String getLocalMACList() throws Exception {
         StringBuilder sb = new StringBuilder();
         Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
