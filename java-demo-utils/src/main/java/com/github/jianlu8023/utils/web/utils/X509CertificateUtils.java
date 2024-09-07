@@ -9,7 +9,6 @@ import java.security.cert.*;
 
 public class X509CertificateUtils {
 
-
     public static X509Certificate getX509Certificate(String certStr) throws CertificateException, IOException {
         Reader certificateReader = new BufferedReader(new StringReader(certStr));
         return readX509Certificate(certificateReader);

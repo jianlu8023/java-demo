@@ -69,18 +69,7 @@ public class SpringContextUtils implements ApplicationContextAware, Closeable {
         return getApplicationContext().getBean(clazz, objects);
     }
 
-    /**
-     * getBeans
-     * <p>
-     * 获取某一类型的bean集合
-     * <p>
-     * create time: 2024/3/19 上午11:58
-     * <p>
-     * create by: ght
-     *
-     * @param clazz :
-     * @return Map<String, T>
-     */
+
     @SuppressWarnings("unused")
     public static <T> Map<String, T> getBeans(Class<T> clazz) {
         return getApplicationContext().getBeansOfType(clazz);
@@ -108,17 +97,7 @@ public class SpringContextUtils implements ApplicationContextAware, Closeable {
         return getApplicationContext().getEnvironment().getActiveProfiles();
     }
 
-    /**
-     * Closes this stream and releases any system resources associated
-     * with it. If the stream is already closed then invoking this
-     * method has no effect.
-     *
-     * <p> As noted in {@link AutoCloseable#close()}, cases where the
-     * close may fail require careful attention. It is strongly advised
-     * to relinquish the underlying resources and to internally
-     * <em>mark</em> the {@code Closeable} as closed, prior to throwing
-     * the {@code IOException}.
-     */
+
     @Override
     public void close() {
         cleanApplicationContext();
