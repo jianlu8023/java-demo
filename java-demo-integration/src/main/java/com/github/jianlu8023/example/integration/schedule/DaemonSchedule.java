@@ -1,6 +1,6 @@
 package com.github.jianlu8023.example.integration.schedule;
 
-import com.github.jianlu8023.example.integration.config.*;
+import com.github.jianlu8023.example.integration.properties.*;
 import com.github.jianlu8023.example.integration.utils.*;
 import okhttp3.*;
 import org.slf4j.*;
