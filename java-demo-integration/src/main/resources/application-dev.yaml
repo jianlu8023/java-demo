@@ -2,24 +2,24 @@ spring:
   application:
     name: java-demo-integration
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: com.mysql.cj.jdbc.Driver
     dynamic:
       aop:
         enabled: true
       primary: mysql
       datasource:
         mysql:
-          # url: jdbc:mysql://127.0.0.1:3306/basic
-          url: jdbc:p6spy:mysql://localhost:3306/basic?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
-          # driver-class-name: com.mysql.cj.jdbc.Driver
-          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+          url: jdbc:mysql://192.168.58.130:3306/basic?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+          #url: jdbc:p6spy:mysql://localhost:3306/basic?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+          #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+          driver-class-name: com.mysql.cj.jdbc.Driver
           username: root
           password: 123456
         pgsql:
-          # url: jdbc:mysql://127.0.0.1:3306/basic
-          url: jdbc:p6spy:postgresql://localhost:5432/basic?currentSchema=raftlogs&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
-          # driver-class-name: com.mysql.cj.jdbc.Driver
-          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+          url: jdbc:postgresql://192.168.58.130:5432/basic?currentSchema=raftlogs&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+          #url: jdbc:p6spy:postgresql://localhost:5432/basic?currentSchema=raftlogs&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+          #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+          driver-class-name: org.postgresql.Driver
           username: postgres
           password: 123456
       druid:
@@ -71,7 +71,6 @@ spring:
         #      login-username: helloworld
         #      login-password: 123456
 
-
         # 保持minIdle数量的长连接
         keepAlive: true
         # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
@@ -81,7 +80,7 @@ spring:
         useGlobalDataSourceStat: true
         # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-        # 设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
+      # 设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
       strict: false
     type: com.alibaba.druid.pool.DruidDataSource
   autoconfigure:
@@ -101,6 +100,7 @@ logging:
     com.alibaba.druid: debug
     com.baomidou: debug
     com.github.jianlu8023.utils: debug
+    org.apache.ibatis.logging: debug
 
 
 server:
@@ -116,6 +116,8 @@ server:
     key-store-type: PKCS12
     key-alias: integration
     key-store-password: integration
+  http2:
+    enabled: true
 
 mybatis-plus:
   configuration:
