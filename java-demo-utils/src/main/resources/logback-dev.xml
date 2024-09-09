@@ -15,7 +15,7 @@
     <!--定义日志文件的存储地址，使用Spring的属性文件配置方式-->
     <!--读取spring配置文件上的属性-->
     <springProperty scope="context" name="log.home" source="logging.file.path" defaultValue="logs"/>
-    <springProperty scope="context" name="app.name" source="spring.application.name"/>
+    <springProperty scope="context" name="app.name" source="spring.application.name" defaultValue="app"/>
 
     <!-- date 格式定义 -->
     <property name="LOG_DATEFORMAT" value="yyyy-MM-dd"/>
