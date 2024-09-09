@@ -55,6 +55,7 @@
         <sqlparser4.5.version>6.1.0</sqlparser4.5.version>
         <p6spy.version>3.9.1</p6spy.version>
         <druid-spring-boot-starter.version>1.2.23</druid-spring-boot-starter.version>
+        <jmockdata.version>4.3.0</jmockdata.version>
     </properties>
 
     <dependencies>
@@ -149,6 +150,20 @@
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>
             <version>${p6spy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.jianlu8023.utils</groupId>
+            <artifactId>mock-spring-boot-starter</artifactId>
+            <version>1.0.0.ALPHA</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/mock-spring-boot-starter-1.0.0.ALPHA.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.jsonzou</groupId>
+            <artifactId>jmockdata</artifactId>
+            <version>${jmockdata.version}</version>
         </dependency>
 
         <dependency>
