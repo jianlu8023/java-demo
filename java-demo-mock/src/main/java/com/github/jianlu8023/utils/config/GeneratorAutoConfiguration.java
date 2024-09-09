@@ -5,7 +5,6 @@ import com.github.jianlu8023.utils.generator.email.*;
 import com.github.jianlu8023.utils.generator.identity.*;
 import com.github.jianlu8023.utils.generator.mobile.*;
 import com.github.jianlu8023.utils.generator.pojo.*;
-import com.github.jianlu8023.utils.generator.utils.*;
 import lombok.extern.slf4j.*;
 import org.springframework.context.annotation.*;
 
@@ -29,12 +28,6 @@ public class GeneratorAutoConfiguration {
     ChineseAddressGenerator chineseAddressGenerator() {
         log.debug("inject chineseAddressGenerator...");
         return ChineseAddressGenerator.newInstance();
-    }
-
-    @Bean
-    SpringContextUtils springContextUtils() {
-        log.debug("inject springContextUtils...");
-        return new SpringContextUtils();
     }
 
     @Bean
