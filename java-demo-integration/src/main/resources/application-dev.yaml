@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: java-demo-integration
+logging:
+  file:
+    path: ./logs
+  config: classpath:logback-dev.xml
+  level:
+    com.github.jianlu8023.example: debug
+
+
+server:
+  servlet:
+    context-path: /integration
+  port: 8090
+  ssl:
+    # keytool -genkey -alias demo -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore demo-keystore.p12 -validity 3650
+    # 程序使用ec算法的证书 下方命令
+    # keytool -genkey -alias integration -storetype PKCS12 -keyalg EC -keysize 256 -keystore integration-keystore.p12 -validity 3650 -sigalg SHA256withECDSA
+    enabled: true
+    key-store: classpath:integration-keystore.p12
+    key-store-type: PKCS12
+    key-alias: integration
+    key-store-password: integration
