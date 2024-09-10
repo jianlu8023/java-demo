@@ -48,6 +48,7 @@ spring:
         testOnReturn: false
         # 每个连接缓存Statement的最大数目
         # PSCache对支持游标的数据库性能提升巨大
+        # oracle设为true，mysql设为false。分库分表较多推荐设置为false
         poolPreparedStatements: true
         # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
         # 连接过滤器，用于统计和防火墙功能 stat,wall
@@ -58,7 +59,7 @@ spring:
           # 慢SQL的阈值时间，单位为毫秒
           slow-sql-millis: 1000
           # 是否合并SQL，默认为false
-          merge-sql: false
+          merge-sql: true
         wall:
           # 是否允许一次执行多条语句，默认为true
           multi-statement-allow: true
@@ -126,7 +127,7 @@ mybatis-plus:
     use-generated-keys: true # 允许JDBC 支持自动生成主键
     default-executor-type: simple # 配置默认的执行器.SIMPLE就是普通执行器;REUSE执行器会重用预处理语句(prepared statements);BATCH执行器将重用语句并执行批量更新
     map-underscore-to-camel-case: true # 使用驼峰命名法转换字段
-    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     banner: false
   mapper-locations: classpath*:/mapper/*.xml

@@ -19,6 +19,7 @@ public class IntegrationApplication {
         // 设置property 关闭 pagehelper 的banner
         // L.debug("pagehelper banner is disabled");
         System.setProperty("pagehelper.banner", "false");
+        System.setProperty("druid.mysql.usePingMethod", "false");
     }
 
     public static void main(String[] args) {

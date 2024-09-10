@@ -9,6 +9,8 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -39,6 +41,16 @@ public class UserController {
     public ApiResponse<Object> addOne() {
         final TbUser tbUser = tbUserService.create();
         return ApiResponse.success(ResponseStatus.SUCCESS, tbUser);
+    }
+
+    @RequestMapping(value = "/list", method = {
+            RequestMethod.GET, RequestMethod.POST
+    })
+    public ApiResponse<Object> list(
+            @RequestParam("pageNo") Integer pageNo,
+            @RequestParam("pageSize") Integer pageSize) {
+        List<TbUser> list = tbUserService.list(pageNo, pageSize);
+        return ApiResponse.success(ResponseStatus.SUCCESS, list);
     }
 
 }
