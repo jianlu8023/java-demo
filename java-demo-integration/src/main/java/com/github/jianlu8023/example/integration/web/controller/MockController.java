@@ -1,7 +1,7 @@
 package com.github.jianlu8023.example.integration.web.controller;
 
-import com.github.jianlu8023.utils.format.response.*;
 import com.github.jianlu8023.utils.format.response.ResponseStatus;
+import com.github.jianlu8023.utils.format.response.*;
 import com.github.jianlu8023.utils.generator.address.*;
 import com.github.jianlu8023.utils.generator.mobile.*;
 import org.springframework.beans.factory.annotation.*;

@@ -35,10 +35,10 @@
             %n是换行符
     -->
     <property name="CONSOLE_LOG_PATTERN"
-              value="[%d{YYYY-MM-dd HH:mm:ss.SSS}] [%highlight(%-5level)] [%highlight(%thread)] [%cyan(%logger{60})] [%blue(%method):%cyan(%line)] : %msg%n"/>
+              value="[%d{YYYY-MM-dd HH:mm:ss.SSS}] [%highlight(%-5level)] [%highlight(%thread)] [%cyan(%logger{30})] [%blue(%method):%cyan(%line)] : %msg%n"/>
 
     <property name="FILE_LOG_PATTERN"
-              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%logger{60}] [%method:%line] : %msg%n"/>
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%logger{30}] [%method:%line] : %msg%n"/>
 
 
     <!--控制台日志， 控制台输出 -->
