@@ -1,4 +1,4 @@
-package com.github.jianlu8023.example.integration.exceptions;
+package com.github.jianlu8023.example.integration.middleware.exceptions;
 
 public class CreateFailException extends RuntimeException {
     public CreateFailException() {

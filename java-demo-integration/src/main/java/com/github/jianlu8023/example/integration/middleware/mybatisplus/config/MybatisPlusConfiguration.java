@@ -1,8 +1,8 @@
-package com.github.jianlu8023.example.integration.mybatisplus.config;
+package com.github.jianlu8023.example.integration.middleware.mybatisplus.config;
 
 import com.baomidou.mybatisplus.extension.plugins.*;
 import com.baomidou.mybatisplus.extension.plugins.inner.*;
-import com.github.jianlu8023.example.integration.mybatisplus.injector.*;
+import com.github.jianlu8023.example.integration.middleware.mybatisplus.injector.*;
 import org.springframework.context.annotation.*;
 
 @Configuration

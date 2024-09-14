@@ -1,4 +1,4 @@
-package com.github.jianlu8023.example.integration.redis.template;
+package com.github.jianlu8023.example.integration.middleware.redis.template;
 
 
 import org.springframework.data.redis.core.*;

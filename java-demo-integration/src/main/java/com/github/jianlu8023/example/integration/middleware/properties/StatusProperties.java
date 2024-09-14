@@ -1,4 +1,4 @@
-package com.github.jianlu8023.example.integration.properties;
+package com.github.jianlu8023.example.integration.middleware.properties;
 
 import org.springframework.boot.context.properties.*;
 import org.springframework.context.annotation.*;

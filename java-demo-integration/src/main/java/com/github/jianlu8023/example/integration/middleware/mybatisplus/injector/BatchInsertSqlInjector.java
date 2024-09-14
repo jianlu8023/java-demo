@@ -1,4 +1,4 @@
-package com.github.jianlu8023.example.integration.mybatisplus.injector;
+package com.github.jianlu8023.example.integration.middleware.mybatisplus.injector;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.core.injector.*;
@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.metadata.*;
 import com.baomidou.mybatisplus.extension.injector.methods.*;
 
 import java.util.*;
-
 
 public class BatchInsertSqlInjector extends DefaultSqlInjector {
 

@@ -1,4 +1,4 @@
-package com.github.jianlu8023.example.integration.pagehelper.dialect;
+package com.github.jianlu8023.example.integration.middleware.pagehelper.dialect;
 
 import com.github.pagehelper.page.*;
 import org.slf4j.*;

@@ -1,4 +1,4 @@
-package com.github.jianlu8023.example.integration.config;
+package com.github.jianlu8023.example.integration.middleware.druid.config;
 
 
 import com.alibaba.druid.support.http.*;

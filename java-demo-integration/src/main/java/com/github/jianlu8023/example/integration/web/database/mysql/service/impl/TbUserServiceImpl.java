@@ -3,7 +3,7 @@ package com.github.jianlu8023.example.integration.web.database.mysql.service.imp
 import com.baomidou.dynamic.datasource.annotation.*;
 import com.baomidou.mybatisplus.core.conditions.query.*;
 import com.baomidou.mybatisplus.extension.service.impl.*;
-import com.github.jianlu8023.example.integration.exceptions.*;
+import com.github.jianlu8023.example.integration.middleware.exceptions.*;
 import com.github.jianlu8023.example.integration.web.database.mysql.entity.*;
 import com.github.jianlu8023.example.integration.web.database.mysql.mapper.*;
 import com.github.jianlu8023.example.integration.web.database.mysql.service.*;
