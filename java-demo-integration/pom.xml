@@ -101,6 +101,14 @@
         </dependency>
 
         <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>Dm8JdbcDriver18</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/DmJdbcDriver18.jar</systemPath>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper-spring-boot-starter.version}</version>
