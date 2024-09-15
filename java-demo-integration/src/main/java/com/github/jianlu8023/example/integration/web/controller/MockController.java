@@ -1,9 +1,8 @@
 package com.github.jianlu8023.example.integration.web.controller;
 
+import com.github.jianlu8023.example.integration.web.service.*;
 import com.github.jianlu8023.utils.format.response.ResponseStatus;
 import com.github.jianlu8023.utils.format.response.*;
-import com.github.jianlu8023.utils.generator.address.*;
-import com.github.jianlu8023.utils.generator.mobile.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,32 +10,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/mock")
 public class MockController {
 
-    private ChineseMobileNumberGenerator mobileNumberGenerator;
+    private MockService mockService;
 
     @Autowired
-    public void setMobileNumberGenerator(ChineseMobileNumberGenerator mobileNumberGenerator) {
-        this.mobileNumberGenerator = mobileNumberGenerator;
-    }
-
-    private ChineseAddressGenerator addressGenerator;
-
-    @Autowired
-    public void setAddressGenerator(ChineseAddressGenerator addressGenerator) {
-        this.addressGenerator = addressGenerator;
+    public void setMockService(MockService mockService) {
+        this.mockService = mockService;
     }
 
     @RequestMapping(value = "/tel", method = {
             RequestMethod.GET, RequestMethod.POST
     })
     public ApiResponse<Object> mockTel() {
-        return ApiResponse.success(ResponseStatus.SUCCESS, mobileNumberGenerator.generate());
+        return ApiResponse.success(ResponseStatus.SUCCESS, mockService.mockTel());
     }
 
     @RequestMapping(value = "/addr", method = {
             RequestMethod.GET, RequestMethod.POST
     })
     public ApiResponse<Object> mockAddr() {
-        String generate = addressGenerator.generate();
-        return ApiResponse.success(ResponseStatus.SUCCESS, generate);
+        return ApiResponse.success(ResponseStatus.SUCCESS, mockService.mockAddr());
     }
 }
