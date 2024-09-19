@@ -1,10 +1,9 @@
-package com.github.jianlu8023.example.integration.schedule;
+package com.github.jianlu8023.example.integration.middleware.schedule;
 
-import com.github.jianlu8023.example.integration.middleware.properties.*;
-import com.github.jianlu8023.example.integration.utils.*;
+
+import com.github.jianlu8023.example.integration.middleware.utils.*;
 import okhttp3.*;
 import org.slf4j.*;
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.scheduling.annotation.*;
 import org.springframework.stereotype.*;
 
@@ -15,27 +14,11 @@ import java.util.*;
 import java.util.concurrent.*;
 
 @Component
-public class DaemonSchedule {
-    private static final Logger L = LoggerFactory.getLogger(DaemonSchedule.class);
+public class HttpsRequestExampleSchedule {
+    private static final Logger L = LoggerFactory.getLogger(HttpsRequestExampleSchedule.class);
 
-    private PushProperties push;
-
-    @Autowired
-    public void setPush(PushProperties push) {
-        this.push = push;
-    }
-
-    @Scheduled(cron = "*/15 * * * * *")
-    public void daemon() {
-        L.debug("service daemon ...");
-    }
-
-    @Scheduled(cron = "*/5 * * * * *")
-    public void pushStatus() {
-        if (!push.getStatus().getEnabled()) {
-            L.debug("push status disabled");
-            return;
-        }
+    @Scheduled(cron = "0/30 * * * * ?") // 每5秒执行一次
+    public void httpsRequest() {
         Response response = null;
         try {
             OkHttpClient build = new OkHttpClient.Builder()
@@ -46,11 +29,17 @@ public class DaemonSchedule {
                             (X509TrustManager) SSLUtils.getTrustAllCerts()[0])
                     .hostnameVerifier((hostname, session) -> true)
                     .build();
-            final RequestBody requestBody = RequestBody.create("", MediaType.parse("application/json; charset=utf-8"));
+            final String ip = NetInterfaceUtils.getRealInter().getIp();
+            final String unique32 = NetInterfaceUtils.getRealInter().getUnique32();
+            final MultipartBody requestBody = new MultipartBody.Builder()
+                    .addFormDataPart("ip", ip)
+                    .addFormDataPart("mac", unique32)
+                    .build();
             Request request = new Request.Builder()
-                    .url(push.getStatus().getUrl())
+                    .url("https://localhost:8090/integration/https/rec")
                     .post(requestBody)
                     .build();
+
             response = build.newCall(request).execute();
             if (response.isSuccessful()) {
                 final String body = Objects.requireNonNull(response.body()).string();
@@ -71,4 +60,5 @@ public class DaemonSchedule {
         }
 
     }
+
 }

@@ -1,4 +1,4 @@
-package com.github.jianlu8023.example.integration.utils;
+package com.github.jianlu8023.example.integration.middleware.utils;
 
 import javax.net.ssl.*;
 import java.security.*;

@@ -11,14 +11,14 @@ spring:
         mysql:
           #url: jdbc:mysql://localhost:3306/basic?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
           #driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:p6spy:mysql://192.168.58.130:3306/basic?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+          url: jdbc:p6spy:mysql://192.168.58.110:3306/basic?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
           username: root
           password: 123456
         pgsql:
           #url: jdbc:postgresql://localhost:5432/postgres?currentSchema=public&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
           #driver-class-name: org.postgresql.Driver
-          url: jdbc:p6spy:postgresql://192.168.58.130:5432/postgres?currentSchema=public&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+          url: jdbc:p6spy:postgresql://192.168.58.110:5432/postgres?currentSchema=public&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
           username: postgres
           password: 123456
@@ -130,7 +130,7 @@ spring:
     mongodb:
       username: root
       password: 123456
-      host: 192.168.58.130
+      host: 192.168.58.110
       database: basic
   devtools:
     restart:

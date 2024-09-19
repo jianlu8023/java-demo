@@ -6,8 +6,8 @@ import org.springframework.boot.*;
 import org.springframework.stereotype.*;
 
 @Component
-public class DialectInit implements ApplicationRunner {
-    private static final Logger L = LoggerFactory.getLogger(DialectInit.class);
+public class DialectRunner implements ApplicationRunner {
+    private static final Logger L = LoggerFactory.getLogger(DialectRunner.class);
 
     @Override
     public void run(ApplicationArguments args) {

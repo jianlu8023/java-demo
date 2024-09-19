@@ -1,4 +1,4 @@
-package com.github.jianlu8023.example.integration.utils;
+package com.github.jianlu8023.example.integration.middleware.utils;
 
 import java.io.*;
 import java.net.*;
