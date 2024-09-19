@@ -13,14 +13,14 @@ public class FormatAutoConfiguration {
     @Bean
     @ConditionalOnClass(GlobalExceptionAdvice.class)
     GlobalExceptionAdvice globalExceptionHandler() {
-        log.info("inject globalExceptionHandler...");
+        log.debug("inject globalExceptionHandler...");
         return new GlobalExceptionAdvice();
     }
 
     @Bean
     @ConditionalOnClass(ResponseBodyResultAdvice.class)
     ResponseBodyResultAdvice responseBodyResultAdvice() {
-        log.info("inject responseBodyResultAdvice");
+        log.debug("inject responseBodyResultAdvice");
         return new ResponseBodyResultAdvice();
     }
 }
