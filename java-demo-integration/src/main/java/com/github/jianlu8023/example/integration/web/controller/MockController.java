@@ -1,6 +1,7 @@
 package com.github.jianlu8023.example.integration.web.controller;
 
 import com.github.jianlu8023.example.integration.web.service.*;
+import com.github.jianlu8023.utils.format.annotation.*;
 import com.github.jianlu8023.utils.format.response.ResponseStatus;
 import com.github.jianlu8023.utils.format.response.*;
 import org.springframework.beans.factory.annotation.*;
@@ -20,6 +21,8 @@ public class MockController {
     @RequestMapping(value = "/tel", method = {
             RequestMethod.GET, RequestMethod.POST
     })
+
+    @RequestLog
     public ApiResponse<Object> mockTel() {
         return ApiResponse.success(ResponseStatus.SUCCESS, mockService.mockTel());
     }

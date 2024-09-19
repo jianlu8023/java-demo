@@ -75,9 +75,9 @@
         <dependency>
             <groupId>com.github.jianlu8023.utils</groupId>
             <artifactId>format-spring-boot-starter</artifactId>
-            <version>1.0.0.RELEASE</version>
+            <version>1.0.1.RELEASE</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/format-spring-boot-starter-1.0.0.RELEASE.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/format-spring-boot-starter-1.0.1.RELEASE.jar</systemPath>
         </dependency>
 
         <!--   fastjson     -->
