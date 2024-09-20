@@ -14,7 +14,7 @@
 
     <groupId>com.github.jianlu8023.utils</groupId>
     <artifactId>mock-spring-boot-starter</artifactId>
-    <version>1.0.0.ALPHA</version>
+    <version>1.0.1.ALPHA</version>
 
     <packaging>jar</packaging>
 
@@ -37,6 +37,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -73,16 +74,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!-- 热部署生效 -->
                     <fork>false</fork>
-<!--                    <mainClass>-->
-<!--                        com.github.jianlu8023.example.integration.IntegrationApplication-->
-<!--                    </mainClass>-->
                     <skip>true</skip>
                     <!--添加资源-->
                     <addResources>true</addResources>
                     <outputDirectory>${project.build.directory}/jar</outputDirectory>
                     <includeSystemScope>true</includeSystemScope>
+                    <classifier>exec</classifier>
                 </configuration>
                 <executions>
                     <execution>
@@ -92,6 +90,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
