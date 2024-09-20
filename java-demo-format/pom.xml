@@ -32,6 +32,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -59,24 +60,68 @@
         <!--</resources>-->
 
         <plugins>
-            <!--<plugin>-->
-            <!--    <groupId>org.springframework.boot</groupId>-->
-            <!--    <artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<executions>-->
-                <!--    <execution>-->
-                <!--        <id>repackage</id>-->
-                <!--        <goals>-->
-                <!--            <goal>repackage</goal>-->
-                <!--        </goals>-->
-                <!--    </execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                <!--    <classifier>exec</classifier>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 如果没有该项配置devtools不会起作用，即应用不会restart -->
+                    <!--<fork>true</fork>-->
+                    <!--支持静态文件热部署-->
+                    <addResources>true</addResources>
+                    <!-- 指定该Main Class为全局的唯一入口 -->
+                    <mainClass>com.github.jianlu8023.utils.format.FormatApplication</mainClass>
+
+                    <!-- spring-boot-maven-plugin这个插件打包的Jar包可以直接运行，但是不可依赖, 添加如下配置使其可被依赖 -->
+                    <classifier>exec</classifier>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <!--可以把依赖的包都打包到生成的Jar包中-->
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <!--将不需要转码的文件扩展名填入nonFilteredFileExtensions-->
+                    <nonFilteredFileExtensions>
+                        <!--<nonFilteredFileExtension>p12</nonFilteredFileExtension>-->
+                        <nonFilteredFileExtension>jks</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>xls</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-static-files</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/static</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
