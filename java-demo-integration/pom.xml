@@ -77,7 +77,7 @@
             <artifactId>format-spring-boot-starter</artifactId>
             <version>1.0.1.RELEASE</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/format-spring-boot-starter-1.0.1.RELEASE-exec.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/format-spring-boot-starter-1.0.1.RELEASE.jar</systemPath>
         </dependency>
 
         <!--   fastjson     -->

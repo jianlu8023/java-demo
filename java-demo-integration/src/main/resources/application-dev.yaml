@@ -105,7 +105,7 @@ spring:
       location: classpath:banner.gif
   redis:
     port: 6379
-    host: 192.168.58.130
+    host: 192.168.58.110
     password: 123456
     #username:
     database: 0
@@ -206,6 +206,6 @@ mybatis-plus:
 pagehelper:
   reasonable: false
   support-methods-arguments: true
-  params: count=coungSql
+  params: count=countSql
   auto-dialect: true
   auto-runtime-dialect: true
