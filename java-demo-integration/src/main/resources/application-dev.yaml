@@ -153,9 +153,13 @@ spring:
     time-zone: GMT+8
   aop:
     auto: true
+    proxy-target-class: true
   main:
     allow-bean-definition-overriding: true
     banner-mode: console
+    allow-circular-references: false
+    log-startup-info: true
+
 
 logging:
   file:
