@@ -1,4 +1,9 @@
 spring:
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 10MB
+      enabled: true
   application:
     name: java-demo-integration
   datasource:
@@ -22,13 +27,13 @@ spring:
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
           username: postgres
           password: 123456
-#        dmsql:
-#          #url: jdbc:dm://localhost:5236/dm?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
-#          #driver-class-name: dm.jdbc.driver.DmDriver
-#          url: jdbc:p6spy:dm://localhost:5236/dm?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
-#          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-#          username: SYSDBA
-#          password: SYSDBA001
+      #        dmsql:
+      #          #url: jdbc:dm://localhost:5236/dm?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+      #          #driver-class-name: dm.jdbc.driver.DmDriver
+      #          url: jdbc:p6spy:dm://localhost:5236/dm?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+      #          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+      #          username: SYSDBA
+      #          password: SYSDBA001
       druid:
         # 配置初始化线程数
         initialSize: 5
@@ -135,6 +140,22 @@ spring:
   devtools:
     restart:
       enabled: true
+  web:
+    resources:
+      static-locations: classpath:/static/
+      #不要为工程中的资源文件建立映射,禁止静态资源的访问
+      add-mappings: false
+  mvc:
+    # 出现错误时, 直接抛出异常
+    throw-exception-if-no-handler-found: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  aop:
+    auto: true
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: console
 
 logging:
   file:
@@ -148,10 +169,11 @@ logging:
     com.github.jianlu8023.utils: debug
     org.apache.ibatis.logging: debug
 
-
 server:
   servlet:
     context-path: /integration
+    session:
+      timeout: 3000s
   port: 8090
   ssl:
     # keytool -genkey -alias demo -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore demo-keystore.p12 -validity 3650
@@ -164,6 +186,7 @@ server:
     key-store-password: integration
   http2:
     enabled: true
+  max-http-header-size: 1MB
 
 mybatis-plus:
   configuration:
@@ -176,3 +199,9 @@ mybatis-plus:
     banner: false
   mapper-locations: classpath*:/mapper/*.xml
 
+pagehelper:
+  reasonable: false
+  support-methods-arguments: true
+  params: count=coungSql
+  auto-dialect: true
+  auto-runtime-dialect: true
