@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.*;
 import org.springframework.web.servlet.*;
 
+import java.nio.file.*;
 import java.util.*;
 
 @RestControllerAdvice
@@ -42,19 +43,16 @@ public class GlobalExceptionAdvice {
             NoHandlerFoundException ex = (NoHandlerFoundException) e;
             log.error("请求地址不存在：", e);
             return ApiResponse.error(ResponseStatus.METHOD_IMPLEMENTED, ex.getRequestURL());
+        } else if (e instanceof AccessDeniedException) {
+            AccessDeniedException ex = (AccessDeniedException) e;
+            log.error("权限不足：", e);
+            return ApiResponse.error(ResponseStatus.INVALID_TOKEN.getCode(), ex.getMessage());
         } else {
             // 如果是系统的异常，比如空指针这些异常
-            log.error("【系统异常】", e);
+            log.error("系统异常", e);
             return ApiResponse.error(ResponseStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    /*
-   else if (e instanceof MissingServletRequestParameterException) {
-            log.error("请求参数缺失：", e);
-            MissingServletRequestParameterException ex = (MissingServletRequestParameterException) e;
-            return ApiResponse.error(ResponseStatus.BAD_REQUEST.getCode(), "请求参数缺少: " + ex.getParameterName());
-        }
-     */
 
     /**
      * 参数缺失异常处理
