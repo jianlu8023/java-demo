@@ -3,7 +3,6 @@ package com.github.jianlu8023.utils.format.advice.request.log;
 import lombok.extern.slf4j.*;
 import org.aspectj.lang.*;
 import org.aspectj.lang.annotation.*;
-import org.springframework.stereotype.*;
 import org.springframework.web.context.request.*;
 
 import javax.servlet.http.*;
@@ -12,7 +11,7 @@ import java.util.*;
 @Slf4j
 @Aspect
 // @Order(1) //如果有多个 可以定义来控制顺序 数字越小执行顺序靠前
-@Component
+// @Component
 public class RequestLogAdvice {
 
     /*
@@ -97,7 +96,7 @@ public void before(){}
         log.info("==================前置执行=====================>");
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        log.info("请求来源： =》" + request.getRemoteAddr());
+        log.info("请求来源：" + request.getRemoteAddr());
         log.info("请求URL：" + request.getRequestURL().toString());
         log.info("请求方式：" + request.getMethod());
         log.info("响应方法：" + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());

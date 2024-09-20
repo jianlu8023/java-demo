@@ -1,6 +1,7 @@
 package com.github.jianlu8023.utils.format.config;
 
 import com.github.jianlu8023.utils.format.advice.exception.*;
+import com.github.jianlu8023.utils.format.advice.request.log.*;
 import com.github.jianlu8023.utils.format.advice.response.*;
 import lombok.extern.slf4j.*;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -13,7 +14,7 @@ public class FormatAutoConfiguration {
     @Bean
     @ConditionalOnClass(GlobalExceptionAdvice.class)
     GlobalExceptionAdvice globalExceptionHandler() {
-        log.debug("inject globalExceptionHandler...");
+        log.debug("inject globalExceptionHandler");
         return new GlobalExceptionAdvice();
     }
 
@@ -22,5 +23,12 @@ public class FormatAutoConfiguration {
     ResponseBodyResultAdvice responseBodyResultAdvice() {
         log.debug("inject responseBodyResultAdvice");
         return new ResponseBodyResultAdvice();
+    }
+
+    @Bean
+    @ConditionalOnClass(RequestLogAdvice.class)
+    RequestLogAdvice requestLogAdvice() {
+        log.debug("inject requestLogAdvice");
+        return new RequestLogAdvice();
     }
 }
