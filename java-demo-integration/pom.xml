@@ -261,7 +261,6 @@
 
         <plugins>
 
-
             <!--执行main方法-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
