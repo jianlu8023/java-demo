@@ -27,13 +27,13 @@ spring:
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
           username: postgres
           password: 123456
-          #dmsql:
-          #url: jdbc:dm://localhost:5236/dm?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+        dmsql:
+          #url: jdbc:dm://192.168.58.130:5236/dm?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
           #driver-class-name: dm.jdbc.driver.DmDriver
-          #url: jdbc:p6spy:dm://localhost:5236/dm?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
-          #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-          #username: SYSDBA
-          #password: SYSDBA001
+          url: jdbc:p6spy:dm://192.168.58.130:5236/dm?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+          username: SYSDBA
+          password: SYSDBA001
       druid:
         # 配置初始化线程数
         initialSize: 5
@@ -177,7 +177,6 @@ logging:
     com.baomidou: debug
     com.github.jianlu8023.utils: debug
     org.apache.ibatis.logging: debug
-
 server:
   servlet:
     context-path: /integration
@@ -196,6 +195,42 @@ server:
   http2:
     enabled: true
   max-http-header-size: 1MB
+  tomcat:
+    max-connections: 8192
+    accept-count: 100
+    accesslog:
+      buffered: true
+      enabled: false
+      encoding: UTF-8
+      suffix: .log
+      max-days: -1
+      check-exists: false
+      ipv6-canonical: false
+      directory: logs
+      pattern: common
+      rename-on-rotate: false
+      rotate: true
+      request-attributes-enabled: false
+    connection-timeout: 60
+    uri-encoding: UTF-8
+    remoteip:
+      host-header: "X-Forwarded-Host"
+      port-header: "X-Forwarded-Port"
+      protocol-header-https-value: https
+    resource:
+      allow-caching: true
+    threads:
+      max: 200
+      min-spare: 10
+    use-relative-redirects: false
+    max-http-form-post-size: 2MB
+    background-processor-delay: 10s
+    max-keep-alive-requests: 100
+    max-swallow-size: 2MB
+    mbeanregistry:
+      enabled: false
+    processor-cache: 200
+    redirect-context-root: true
 
 mybatis-plus:
   configuration:
