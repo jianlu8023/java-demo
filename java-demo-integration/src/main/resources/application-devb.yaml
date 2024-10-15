@@ -159,6 +159,12 @@ spring:
     banner-mode: console
     allow-circular-references: false
     log-startup-info: true
+  elasticsearch:
+    uris: http://192.168.58.110:9200
+    connection-timeout: 1s
+    username: "elastic"
+    password: "elasticpw"
+
 
 
 logging:
@@ -172,6 +178,9 @@ logging:
     com.baomidou: debug
     com.github.jianlu8023.utils: debug
     org.apache.ibatis.logging: debug
+    org.springframework.data.elasticsearch: debug
+    org.springframework.data.repository: debug
+
 
 server:
   servlet:
