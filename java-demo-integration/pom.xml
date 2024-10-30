@@ -228,6 +228,13 @@
             <systemPath>${pom.basedir}/lib/mock-spring-boot-starter-1.0.1.ALPHA.jar</systemPath>
         </dependency>
 
+        <!--easyexcel-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+
         <!--jmockdata-->
         <dependency>
             <groupId>com.github.jsonzou</groupId>
