@@ -228,11 +228,23 @@
             <systemPath>${pom.basedir}/lib/mock-spring-boot-starter-1.0.1.ALPHA.jar</systemPath>
         </dependency>
 
-        <!--easyexcel-->
+        <!-- easyexcel -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
             <version>4.0.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.16.1</version>
         </dependency>
 
         <!--jmockdata-->
