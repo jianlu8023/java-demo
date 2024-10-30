@@ -1,8 +1,6 @@
 package com.github.jianlu8023.example.integration.web.controller;
 
 
-import com.github.jianlu8023.utils.format.response.ResponseStatus;
-import com.github.jianlu8023.utils.format.response.*;
 import org.slf4j.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +8,8 @@ import org.springframework.web.servlet.mvc.method.annotation.*;
 
 import javax.servlet.http.*;
 import java.io.*;
+import java.net.*;
+import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -95,7 +95,7 @@ public class AsyncController {
     }
 
     @GetMapping("/streamingDownload")
-    public ApiResponse<Object> streamingDownload(HttpServletResponse response) {
+    public ResponseEntity<Object> streamingDownload(HttpServletResponse response) {
 
         try {
             final File tempFile = File.createTempFile(UUID.randomUUID().toString(), ".txt");
@@ -103,21 +103,25 @@ public class AsyncController {
             tempFile.deleteOnExit();
 
             download(response, tempFile);
-            return ApiResponse.success(ResponseStatus.SUCCESS, "下载成功");
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body("download success".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
-            return ApiResponse.error(ResponseStatus.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     private void download(HttpServletResponse response, File tempFile) throws IOException {
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + tempFile.getName() + "\"");
-
+        // response.setContentType("application/octet-stream");
+        response.setHeader("content-type", "application/octet-stream");
+        // response.setHeader("Content-Disposition", "attachment; filename=\"" + tempFile.getName() + "\"");
+        response.setHeader("Content-Length", "" + tempFile.length());
+        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(tempFile.getName(), "UTF-8"));
         StreamingResponseBody responseBody = outputStream -> {
             // 从文件或其他数据源读取数据
             // 将数据写入输出流
 
             outputStream.write("Hello, World!".getBytes());
+            outputStream.write("nihao shijie ".getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
         };
 
