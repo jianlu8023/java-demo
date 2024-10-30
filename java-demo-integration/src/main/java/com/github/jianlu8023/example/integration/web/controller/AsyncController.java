@@ -1,11 +1,14 @@
 package com.github.jianlu8023.example.integration.web.controller;
 
 
+import com.github.jianlu8023.utils.format.response.ResponseStatus;
+import com.github.jianlu8023.utils.format.response.*;
 import org.slf4j.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.*;
 
+import javax.servlet.http.*;
 import java.io.*;
 import java.time.*;
 import java.util.*;
@@ -91,4 +94,33 @@ public class AsyncController {
         return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(stream);
     }
 
+    @GetMapping("/streamingDownload")
+    public ApiResponse<Object> streamingDownload(HttpServletResponse response) {
+
+        try {
+            final File tempFile = File.createTempFile(UUID.randomUUID().toString(), ".txt");
+
+            tempFile.deleteOnExit();
+
+            download(response, tempFile);
+            return ApiResponse.success(ResponseStatus.SUCCESS, "下载成功");
+        } catch (Exception e) {
+            return ApiResponse.error(ResponseStatus.INTERNAL_SERVER_ERROR, e);
+        }
+    }
+
+    private void download(HttpServletResponse response, File tempFile) throws IOException {
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + tempFile.getName() + "\"");
+
+        StreamingResponseBody responseBody = outputStream -> {
+            // 从文件或其他数据源读取数据
+            // 将数据写入输出流
+
+            outputStream.write("Hello, World!".getBytes());
+            outputStream.flush();
+        };
+
+        responseBody.writeTo(response.getOutputStream());
+    }
 }
