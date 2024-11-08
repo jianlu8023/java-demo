@@ -36,4 +36,7 @@ RUN mkdir -p /usr/share/app/logs
 
 EXPOSE 8080
 
+VOLUME /usr/share/app/config
+VOLUME /usr/share/app/logs
+
 ENTRYPOINT ["java","-jar","app.jar"]

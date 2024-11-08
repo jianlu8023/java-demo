@@ -1,0 +1,16 @@
+networks:
+  app:
+    name: "app_net"
+
+services:
+  integration:
+    image: java-demo-integration:1.0.0
+    restart: always
+    container_name: integration
+    networks:
+      - app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs:/usr/share/app/logs
+      - ./src/main/resources:/usr/share/app/config
