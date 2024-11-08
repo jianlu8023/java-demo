@@ -1,4 +1,4 @@
-FROM alpine:3.19 as databuilder
+FROM alpine:3.19 AS databuilder
 
 RUN sed -i 's#dl-cdn.alpinelinux.org#mirrors.ustc.edu.cn#g' /etc/apk/repositories \
     && apk update \
@@ -16,8 +16,8 @@ COPY . .
 RUN mvn -Dmaven.test.skip=true -DarchetypeCatalog=internal -Dfile.encoding=UTF-8 clean compile package
 
 FROM amazoncorretto:8-alpine3.19-jdk
-#LABEL com.jianlu8023.study-java.author=jianlu
-MAINTAINER jianlu
+LABEL author=jianlu
+#MAINTAINER jianlu
 
 ENV LANG=C.UTF-8
 
