@@ -442,7 +442,7 @@
     <!--依赖加速-->
     <repositories>
         <repository>
-            <id>central</id>
+            <id>aliyun-mirror</id>
             <name>Aliyun Maven Repository</name>
             <url>https://maven.aliyun.com/repository/public</url>
             <snapshots>
@@ -452,6 +452,27 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
+
+	<repository>
+	    <id>tencent-mirror</id>
+	    <url>https://mirrors.tencent.com/nexus/repository/maven-central/</url>
+	</repository>
+
+	<repository>
+    	    <id>netease-maven</id>
+	    <url>https://mirrors.163.com/maven/repository/maven-central/</url>
+	</repository>
+
+	<repository>
+            <id>huawei-maven</id>
+            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+
 
         <!--jitpack源-->
         <repository>

@@ -5,3 +5,4 @@ version ?= 1.0.0
 
 build:
 	docker buildx build -t java-demo-integration:${version} .
+	docker builder prune -f -a 
