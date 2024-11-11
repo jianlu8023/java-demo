@@ -228,25 +228,6 @@
             <systemPath>${pom.basedir}/lib/mock-spring-boot-starter-1.0.1.ALPHA.jar</systemPath>
         </dependency>
 
-        <!-- easyexcel -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>easyexcel</artifactId>
-            <version>4.0.3</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- commons-io -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.16.1</version>
-        </dependency>
-
         <!--jmockdata-->
         <dependency>
             <groupId>com.github.jsonzou</groupId>
@@ -267,6 +248,27 @@
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
 
+
+        <!-- easyexcel -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>4.0.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.16.1</version>
+        </dependency>
+
         <!--spring-boot-starter-test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -282,7 +284,7 @@
     </dependencies>
 
     <build>
-        <finalName>integration-${pom.version}</finalName>
+        <finalName>integration-${project.version}</finalName>
 
         <plugins>
 
@@ -309,9 +311,21 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <verbose>true</verbose>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+
+                    <!-- 添加引入本地jar组件  此方法适用于低于 maven 的3.1版本之前-->
+                    <!--<compilerArguments>-->
+                    <!--    <extdirs>${project.basedir}\lib</extdirs>-->
+                    <!--</compilerArguments>-->
+
+                    <!-- 添加引入本地jar组件 -->
+                    <compilerArgs>
+                        <arg>-extdirs</arg>
+                        <arg>${project.basedir}\lib</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
@@ -339,6 +353,9 @@
                     <addResources>true</addResources>
                     <outputDirectory>${project.build.directory}/jar</outputDirectory>
                     <includeSystemScope>true</includeSystemScope>
+                    <arguments>
+                        <argument>${project.basedir}\lib</argument>
+                    </arguments>
                 </configuration>
                 <executions>
                     <execution>
@@ -378,7 +395,10 @@
                         </manifest>
                         <manifestEntries>
                             <!--MANIFEST.MF 中 Class-Path 加入资源文件目录 -->
-                            <Class-Path>./config/</Class-Path>
+                            <Class-Path>./config/ lib/Dm8JdbcDriver18-1.0.0.jar
+                                lib/format-spring-boot-starter-1.0.1.RELEASE.jar
+                                lib/mock-spring-boot-starter-1.0.1.ALPHA.jar
+                            </Class-Path>
                         </manifestEntries>
                     </archive>
                     <outputDirectory>${project.build.directory}</outputDirectory>
@@ -398,6 +418,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
+                            <includeScope>compile</includeScope>
                             <outputDirectory>${project.build.directory}/lib/</outputDirectory>
                         </configuration>
                     </execution>
@@ -453,17 +474,17 @@
             </releases>
         </repository>
 
-	<repository>
-	    <id>tencent-mirror</id>
-	    <url>https://mirrors.tencent.com/nexus/repository/maven-central/</url>
-	</repository>
+        <repository>
+            <id>tencent-mirror</id>
+            <url>https://mirrors.tencent.com/nexus/repository/maven-central/</url>
+        </repository>
 
-	<repository>
-    	    <id>netease-maven</id>
-	    <url>https://mirrors.163.com/maven/repository/maven-central/</url>
-	</repository>
+        <repository>
+            <id>netease-maven</id>
+            <url>https://mirrors.163.com/maven/repository/maven-central/</url>
+        </repository>
 
-	<repository>
+        <repository>
             <id>huawei-maven</id>
             <url>https://mirrors.huaweicloud.com/repository/maven/</url>
         </repository>
