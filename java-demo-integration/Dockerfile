@@ -39,8 +39,12 @@ EXPOSE 8080
 VOLUME /usr/share/app/config
 VOLUME /usr/share/app/logs
 
-HEALTHCHECK --interval=30s --timeout=3s --retries=5 \
-	CMD wget --no-check-certificate --post-data '' https://localhost:8090/integration/status/ping || exit 1
+#HEALTHCHECK --interval=60s --timeout=5s --retries=3 CMD echo $(wget --no-check-certificate --post-data '' -O - -q https://192.168.58.110:8080/integration/status/ping) | grep -oP '"code":\s*\K\d+' | grep -q "200" || exit 1
+
+#HEALTHCHECK --interval=60s --timeout=5s --retries=3 CMD echo $(wget --no-check-certificate --post-data '' -O - -q https://192.168.58.110:8080/integration/status/ping) | grep -o '"code":[[:space:]]*[0-9]\+' | grep -o '[0-9]\+' | grep -q "200"
+
+HEALTHCHECK --interval=60s --timeout=5s --retries=3 \
+	CMD echo $(wget --no-check-certificate --post-data '' -O - -q https://localhost:8090/integration/status/ping) |  sed -n 's/.*"code":[[:space:]]*\([0-9][0-9]*\).*/\1/p' | grep -q "200" || exit 1
 
 
 ENTRYPOINT ["java","-jar","app.jar"]

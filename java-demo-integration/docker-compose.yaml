@@ -4,7 +4,7 @@ networks:
 
 services:
   integration:
-    image: java-demo/alpine/integration:v202411111700
+    image: java-demo/alpine/integration:v202411111757
     restart: on-failure:3
     container_name: integration
     networks:
