@@ -39,4 +39,8 @@ EXPOSE 8080
 VOLUME /usr/share/app/config
 VOLUME /usr/share/app/logs
 
+HEALTHCHECK --interval=30s --timeout=3s --retries=5 \
+	CMD wget --no-check-certificate --post-data '' https://localhost:8090/integration/status/ping || exit 1
+
+
 ENTRYPOINT ["java","-jar","app.jar"]
