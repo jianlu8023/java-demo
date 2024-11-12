@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.github.jianlu8023.utils.config.GeneratorAutoConfiguration
