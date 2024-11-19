@@ -3,7 +3,7 @@ package com.github.jianlu8023.example.integration.web.controller;
 import com.baomidou.mybatisplus.core.conditions.query.*;
 import com.github.jianlu8023.example.integration.web.database.pgsql.entity.*;
 import com.github.jianlu8023.example.integration.web.database.pgsql.service.*;
-import com.github.jianlu8023.utils.format.response.*;
+import com.github.jianlu8023.format.response.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;

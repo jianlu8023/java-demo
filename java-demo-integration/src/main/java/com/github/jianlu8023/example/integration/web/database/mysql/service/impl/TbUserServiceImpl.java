@@ -7,7 +7,8 @@ import com.github.jianlu8023.example.integration.middleware.exceptions.*;
 import com.github.jianlu8023.example.integration.web.database.mysql.entity.*;
 import com.github.jianlu8023.example.integration.web.database.mysql.mapper.*;
 import com.github.jianlu8023.example.integration.web.database.mysql.service.*;
-import com.github.jianlu8023.utils.generator.pojo.*;
+
+import com.github.jianlu8023.mock.generator.pojo.*;
 import com.github.pagehelper.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;

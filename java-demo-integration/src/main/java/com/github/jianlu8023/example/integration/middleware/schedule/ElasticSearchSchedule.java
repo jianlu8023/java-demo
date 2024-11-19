@@ -3,7 +3,7 @@ package com.github.jianlu8023.example.integration.middleware.schedule;
 import com.alibaba.fastjson.*;
 import com.github.jianlu8023.example.integration.middleware.elasticsearch.entity.*;
 import com.github.jianlu8023.example.integration.middleware.elasticsearch.service.*;
-import com.github.jianlu8023.utils.generator.pojo.*;
+import com.github.jianlu8023.mock.generator.pojo.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.scheduling.annotation.*;

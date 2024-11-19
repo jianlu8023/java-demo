@@ -3,8 +3,8 @@ package com.github.jianlu8023.example.integration.web.controller;
 
 import com.alibaba.fastjson.*;
 import com.alibaba.fastjson.serializer.*;
-import com.github.jianlu8023.utils.format.response.ResponseStatus;
-import com.github.jianlu8023.utils.format.response.*;
+import com.github.jianlu8023.format.response.*;
+import com.github.jianlu8023.format.response.ResponseStatus;
 import org.slf4j.*;
 import org.springframework.web.bind.annotation.*;
 

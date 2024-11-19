@@ -1,8 +1,9 @@
 package com.github.jianlu8023.example.integration.web.service.impl;
 
 import com.github.jianlu8023.example.integration.web.service.*;
-import com.github.jianlu8023.utils.generator.address.*;
-import com.github.jianlu8023.utils.generator.mobile.*;
+
+import com.github.jianlu8023.mock.generator.address.*;
+import com.github.jianlu8023.mock.generator.mobile.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 

@@ -1,11 +1,13 @@
 package com.github.jianlu8023.example.integration.web.controller;
 
 import com.github.jianlu8023.example.integration.web.service.*;
-import com.github.jianlu8023.utils.format.annotation.*;
-import com.github.jianlu8023.utils.format.response.ResponseStatus;
-import com.github.jianlu8023.utils.format.response.*;
+
+import com.github.jianlu8023.format.annotation.*;
+import com.github.jianlu8023.format.response.*;
+import com.github.jianlu8023.format.response.ResponseStatus;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/mock")

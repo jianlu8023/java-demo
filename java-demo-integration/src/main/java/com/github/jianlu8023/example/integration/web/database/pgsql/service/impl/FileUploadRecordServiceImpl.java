@@ -6,7 +6,7 @@ import com.github.jianlu8023.example.integration.middleware.exceptions.*;
 import com.github.jianlu8023.example.integration.web.database.pgsql.entity.*;
 import com.github.jianlu8023.example.integration.web.database.pgsql.mapper.*;
 import com.github.jianlu8023.example.integration.web.database.pgsql.service.*;
-import com.github.jianlu8023.utils.generator.pojo.*;
+import com.github.jianlu8023.mock.generator.pojo.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
