@@ -1,4 +1,4 @@
-package com.github.jianlu8023.utils.generator;
+package com.github.jianlu8023.mock.generator;
 
 import java.util.*;
 

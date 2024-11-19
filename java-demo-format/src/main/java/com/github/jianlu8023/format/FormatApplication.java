@@ -1,4 +1,4 @@
-package com.github.jianlu8023.utils.format;
+package com.github.jianlu8023.format;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;

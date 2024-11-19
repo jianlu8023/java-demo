@@ -1,5 +1,7 @@
-package com.github.jianlu8023.utils.generator.address;
+package com.github.jianlu8023.mock.generator.address;
 
+import com.github.jianlu8023.mock.generator.*;
+import com.github.jianlu8023.mock.generator.utils.*;
 import com.github.jianlu8023.utils.generator.*;
 import com.github.jianlu8023.utils.generator.utils.*;
 import org.apache.commons.lang3.*;

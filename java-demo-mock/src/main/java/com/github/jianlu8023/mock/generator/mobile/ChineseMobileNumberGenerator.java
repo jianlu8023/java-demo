@@ -1,5 +1,6 @@
-package com.github.jianlu8023.utils.generator.mobile;
+package com.github.jianlu8023.mock.generator.mobile;
 
+import com.github.jianlu8023.mock.generator.*;
 import com.github.jianlu8023.utils.generator.*;
 import org.apache.commons.lang3.*;
 

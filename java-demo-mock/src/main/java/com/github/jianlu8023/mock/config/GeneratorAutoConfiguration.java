@@ -1,5 +1,10 @@
-package com.github.jianlu8023.utils.config;
+package com.github.jianlu8023.mock.config;
 
+import com.github.jianlu8023.mock.generator.address.*;
+import com.github.jianlu8023.mock.generator.email.*;
+import com.github.jianlu8023.mock.generator.identity.*;
+import com.github.jianlu8023.mock.generator.mobile.*;
+import com.github.jianlu8023.mock.generator.pojo.*;
 import com.github.jianlu8023.utils.generator.address.*;
 import com.github.jianlu8023.utils.generator.email.*;
 import com.github.jianlu8023.utils.generator.identity.*;

@@ -14,9 +14,9 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.github.jianlu8023.utils</groupId>
+    <groupId>com.github.jianlu8023</groupId>
     <artifactId>format-spring-boot-starter</artifactId>
-    <version>1.0.1.RELEASE</version>
+    <version>1.0.0.RELEASE</version>
 
     <name>format-spring-boot-starter</name>
 
@@ -69,7 +69,7 @@
                     <!--支持静态文件热部署-->
                     <addResources>true</addResources>
                     <!-- 指定该Main Class为全局的唯一入口 -->
-                    <mainClass>com.github.jianlu8023.utils.format.FormatApplication</mainClass>
+                    <mainClass>com.github.jianlu8023.format.FormatApplication</mainClass>
 
                     <!-- spring-boot-maven-plugin这个插件打包的Jar包可以直接运行，但是不可依赖, 添加如下配置使其可被依赖 -->
                     <classifier>exec</classifier>

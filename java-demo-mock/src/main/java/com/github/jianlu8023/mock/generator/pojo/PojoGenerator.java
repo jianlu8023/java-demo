@@ -1,5 +1,11 @@
-package com.github.jianlu8023.utils.generator.pojo;
+package com.github.jianlu8023.mock.generator.pojo;
 
+import com.github.jianlu8023.mock.generator.*;
+import com.github.jianlu8023.mock.generator.address.*;
+import com.github.jianlu8023.mock.generator.email.*;
+import com.github.jianlu8023.mock.generator.identity.*;
+import com.github.jianlu8023.mock.generator.utils.*;
+import com.github.jianlu8023.mock.testdata.entity.*;
 import com.github.jianlu8023.utils.generator.*;
 import com.github.jianlu8023.utils.generator.address.*;
 import com.github.jianlu8023.utils.generator.email.*;

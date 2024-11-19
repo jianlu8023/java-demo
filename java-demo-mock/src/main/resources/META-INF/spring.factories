@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.github.jianlu8023.utils.config.GeneratorAutoConfiguration
+  com.github.jianlu8023.mock.config.GeneratorAutoConfiguration

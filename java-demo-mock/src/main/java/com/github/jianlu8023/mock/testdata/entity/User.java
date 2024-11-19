@@ -1,4 +1,4 @@
-package com.github.jianlu8023.utils.testdata.entity;
+package com.github.jianlu8023.mock.testdata.entity;
 
 import java.io.*;
 import java.util.*;

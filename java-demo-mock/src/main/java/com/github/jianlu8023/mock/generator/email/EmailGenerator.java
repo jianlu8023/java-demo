@@ -1,5 +1,6 @@
-package com.github.jianlu8023.utils.generator.email;
+package com.github.jianlu8023.mock.generator.email;
 
+import com.github.jianlu8023.mock.generator.*;
 import com.github.jianlu8023.utils.generator.*;
 
 public class EmailGenerator extends AbstractGenerator<String> {
