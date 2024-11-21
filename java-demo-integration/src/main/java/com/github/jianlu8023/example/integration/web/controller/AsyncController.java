@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.*;
+import java.nio.file.*;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -95,36 +96,61 @@ public class AsyncController {
     }
 
     @GetMapping("/streamingDownload")
-    public ResponseEntity<Object> streamingDownload(HttpServletResponse response) {
-
-        try {
-            final File tempFile = File.createTempFile(UUID.randomUUID().toString(), ".txt");
-
-            tempFile.deleteOnExit();
-
-            download(response, tempFile);
-            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body("download success".getBytes(StandardCharsets.UTF_8));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    public ResponseEntity<StreamingResponseBody> downloadFile() throws IOException {
+        // 1. 生成临时文件并写入 "Hello World"
+        File tempFile = File.createTempFile(UUID.randomUUID().toString(), ".txt");
+        System.out.println(tempFile.getName());
+        tempFile.deleteOnExit();
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            fos.write("Hello World".getBytes());
         }
-    }
 
-    private void download(HttpServletResponse response, File tempFile) throws IOException {
-        // response.setContentType("application/octet-stream");
-        response.setHeader("content-type", "application/octet-stream");
-        // response.setHeader("Content-Disposition", "attachment; filename=\"" + tempFile.getName() + "\"");
-        response.setHeader("Content-Length", "" + tempFile.length());
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(tempFile.getName(), "UTF-8"));
-        StreamingResponseBody responseBody = outputStream -> {
-            // 从文件或其他数据源读取数据
-            // 将数据写入输出流
+        // 2. 设置响应头信息
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", String.format("attachment; filename=%s", tempFile.getName()));
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
-            outputStream.write("Hello, World!".getBytes());
-            outputStream.write("nihao shijie ".getBytes(StandardCharsets.UTF_8));
+        // 3. 使用StreamingResponseBody来实现文件的流式下载
+        StreamingResponseBody stream = outputStream -> {
+            Path path = Paths.get(tempFile.getAbsolutePath());
+            Files.copy(path, outputStream);
             outputStream.flush();
         };
 
-        responseBody.writeTo(response.getOutputStream());
+        // 4. 返回响应实体
+        return ResponseEntity.ok().headers(headers).body(stream);
     }
+
+    // public ResponseEntity<Object> streamingDownload(HttpServletResponse response) {
+    //
+    //     try {
+    //         final File tempFile = File.createTempFile(UUID.randomUUID().toString(), ".txt");
+    //
+    //         tempFile.deleteOnExit();
+    //
+    //         download(response, tempFile);
+    //         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_OCTET_STREAM)
+    //                 .body("download success".getBytes(StandardCharsets.UTF_8));
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    //     }
+    // }
+    //
+    // private void download(HttpServletResponse response, File tempFile) throws IOException {
+    //     // response.setContentType("application/octet-stream");
+    //     response.setHeader("content-type", "application/octet-stream");
+    //     // response.setHeader("Content-Disposition", "attachment; filename=\"" + tempFile.getName() + "\"");
+    //     response.setHeader("Content-Length", "" + tempFile.length());
+    //     response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(tempFile.getName(), "UTF-8"));
+    //     StreamingResponseBody responseBody = outputStream -> {
+    //         // 从文件或其他数据源读取数据
+    //         // 将数据写入输出流
+    //
+    //         outputStream.write("Hello, World!".getBytes());
+    //         outputStream.write("nihao shijie ".getBytes(StandardCharsets.UTF_8));
+    //         outputStream.flush();
+    //     };
+    //
+    //     responseBody.writeTo(response.getOutputStream());
+    // }
 }
