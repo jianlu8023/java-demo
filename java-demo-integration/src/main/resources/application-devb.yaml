@@ -99,7 +99,7 @@ spring:
   autoconfigure:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   banner:
-    location: classpath:banner.txt
+    location: classpath:banner/banner-spring.txt
     charset: UTF-8
     image:
       location: classpath:banner.gif
