@@ -116,6 +116,8 @@
         <dubbo-spring-boot-starter.version>2.0.0</dubbo-spring-boot-starter.version>
         <zkclient.version>0.11</zkclient.version>
         <mybatis-generator-maven-plugin.version>1.4.2</mybatis-generator-maven-plugin.version>
+
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
     </properties>
 
     <dependencyManagement>
@@ -386,6 +388,13 @@
                 <artifactId>zkclient</artifactId>
                 <version>${zkclient.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>4.8.4</version>
+                <optional>true</optional>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -413,6 +422,8 @@
                     </configuration>
                 </plugin>
 
+                <!-- maven-assembly-plugin -->
+                <!-- https://maven.apache.org/plugins/maven-assembly-plugin/index.html -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -429,6 +440,162 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+
+                <!-- license-maven-plugin -->
+                <!-- https://mathieu.carbou.me/license-maven-plugin/reports/3.0/plugin-info.html -->
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>4.6</version> <!-- 请检查最新版本 -->
+                    <configuration>
+                        <quiet>true</quiet>
+                        <!--HEADER文件-->
+                        <header>src/main/resources/license-header.txt</header>
+                        <includes>
+                            <include>**/*.java</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/*.properties</exclude>
+                            <exclude>*.sh</exclude>
+                            <exclude>*.yml</exclude>
+                            <exclude>.editorconfig</exclude>
+                            <exclude>.gitignore</exclude>
+                            <exclude>**/*.md</exclude>
+                            <exclude>**/*.xml</exclude>
+                            <exclude>**/generated/**</exclude>
+                        </excludes>
+                        <!--严格检查-->
+                        <strictCheck>true</strictCheck>
+                        <mapping>
+                            <java>SLASHSTAR_STYLE</java>
+                        </mapping>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>process-sources</phase>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>remove</goal>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+
+                <!-- versions-maven-plugin -->
+                <!-- mvn versions:set -DnewVersion=1.1 -->
+                <!-- 多模块 没有继承关系 mvn versions:set -DprocessAllModules=true -DnewVersion=1.1 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.17.1</version>
+                    <configuration>
+                        <generateBackupPoms>false</generateBackupPoms>
+                    </configuration>
+                </plugin>
+
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.4.0</version>
+                    <configuration>
+                        <useCache>true</useCache>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>prepare-war</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>exploded</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+
+                <!--
+                    问题背景：本地的一个有前后端的demo有用（没有严格的前后端分离），静态资源放在webapp下面。更新静态资源文件之后，没有生效。
+                    问题原因：浏览器缓存。
+                    解决方案：使用 maven 的 com.google.code.maven-replacer-plugin 插件，在项目打包 package 时自动为静态文件追加 xxx.js?v=time 的后缀，从而解决浏览器修改后浏览器缓存问题，此插件只会在生成 war 包源码时生效，不需要修改任何代码。
+
+                    原始文件和最终生成效果
+                        原始文件：
+                            <script src="${resource!}/js/xxx/xxx.js"></script>
+                        打包后：
+                            <script src="${resource!}/js/xxx/xxx.js?v=20180316082543"></script>
+
+                    文件引用结尾处，必须是pom.xml文件中添加的规则：
+                        <script src="${resource!}/js/xxx/xxx.js" type="text/javascript"></script>
+                        <link href="${resource!}/css/xxx/xxx.css" rel="stylesheet" type="text/css">
+                -->
+                <!-- https://www.cnblogs.com/yclimb/p/9934102.html -->
+                <plugin>
+                    <groupId>com.google.code.maven-replacer-plugin</groupId>
+                    <artifactId>replacer</artifactId>
+                    <version>1.5.3</version>
+                    <executions>
+                        <!-- 打包前进行替换 -->
+                        <execution>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>replace</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <!-- 自动识别到项目target文件夹 -->
+                        <basedir>${build.directory}</basedir>
+                        <!-- 替换的文件所在目录规则 -->
+                        <includes>
+                            <include>${build.finalName}/WEB-INF/views/*.html</include>
+                            <include>${build.finalName}/WEB-INF/views/**/*.html</include>
+                        </includes>
+                        <replacements>
+                            <!-- 更改规则，在css/js文件末尾追加?v=时间戳，反斜杠表示字符转义 -->
+                            <replacement>
+                                <token>\.css\"</token>
+                                <value>.css?v=${maven.build.timestamp}\"</value>
+                            </replacement>
+                            <replacement>
+                                <token>\.css\'</token>
+                                <value>.css?v=${maven.build.timestamp}\'</value>
+                            </replacement>
+                            <replacement>
+                                <token>\.js\"</token>
+                                <value>.js?v=${maven.build.timestamp}\"</value>
+                            </replacement>
+                            <replacement>
+                                <token>\.js\'</token>
+                                <value>.js?v=${maven.build.timestamp}\'</value>
+                            </replacement>
+                        </replacements>
+                    </configuration>
+                </plugin>
+
+
+                <!-- maven-release-plugin -->
+                <!-- https://blog.csdn.net/taiyangdao/article/details/82658799 -->
+                <!-- https://maven.apache.org/maven-release/maven-release-plugin/ -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                </plugin>
+
+                <!-- cobertura-maven-plugin -->
+                <!-- https://blog.csdn.net/liqingjie_fjfz/article/details/47984337 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>2.7</version>
                 </plugin>
 
                 <plugin>
