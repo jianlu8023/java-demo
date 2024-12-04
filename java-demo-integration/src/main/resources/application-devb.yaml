@@ -75,15 +75,13 @@ spring:
         wall:
           # 是否允许一次执行多条语句，默认为true
           multi-statement-allow: true
-
-        #      enabled: true
-        #      # 设置白名单，不填则允许所有访问
-        #      allow:
-        #      url-pattern: /druid/*
-        #      # 控制台管理用户名和密码
-        #      login-username: helloworld
-        #      login-password: 123456
-
+          #enabled: true
+          # 设置白名单，不填则允许所有访问
+          #allow:
+          #url-pattern: /druid/*
+          # 控制台管理用户名和密码
+          #login-username: helloworld
+          #login-password: 123456
         # 保持minIdle数量的长连接
         keepAlive: true
         # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
@@ -92,7 +90,7 @@ spring:
         # 是否合并多个DruidDataSource的监控数据
         useGlobalDataSourceStat: true
         # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+        #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
       # 设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
       strict: false
     type: com.alibaba.druid.pool.DruidDataSource
@@ -165,8 +163,6 @@ spring:
     username: "elastic"
     password: "elasticpw"
 
-
-
 logging:
   file:
     path: ./logs
@@ -180,7 +176,6 @@ logging:
     org.apache.ibatis.logging: debug
     org.springframework.data.elasticsearch: debug
     org.springframework.data.repository: debug
-
 
 server:
   servlet:

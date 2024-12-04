@@ -5,6 +5,7 @@ import org.slf4j.*;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.boot.autoconfigure.jdbc.*;
+import org.springframework.cache.annotation.*;
 import org.springframework.scheduling.annotation.*;
 import org.springframework.transaction.annotation.*;
 
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.*;
 @EnableScheduling
 @EnableTransactionManagement
 @EnableFormat
+@EnableCaching
 public class IntegrationApplication {
     private static final Logger L = LoggerFactory.getLogger(IntegrationApplication.class);
 

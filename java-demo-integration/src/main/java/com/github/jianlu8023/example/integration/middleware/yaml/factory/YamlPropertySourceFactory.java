@@ -1,5 +1,6 @@
 package com.github.jianlu8023.example.integration.middleware.yaml.factory;
 
+import org.jetbrains.annotations.*;
 import org.springframework.beans.factory.config.*;
 import org.springframework.core.env.*;
 import org.springframework.core.io.support.*;
@@ -9,14 +10,16 @@ import java.util.*;
 
 public class YamlPropertySourceFactory implements PropertySourceFactory {
 
+    @NotNull
     @Override
-    public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) throws IOException {
+    public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) {
         YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
         factory.setResources(encodedResource.getResource());
 
         Properties properties = factory.getObject();
 
-        return new PropertiesPropertySource(encodedResource.getResource().getFilename(), properties);
+        assert properties != null;
+        return new PropertiesPropertySource(Objects.requireNonNull(encodedResource.getResource().getFilename()), properties);
     }
 
     // @Override
